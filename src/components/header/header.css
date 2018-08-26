@@ -1,0 +1,8 @@
+.navigation-starwars {
+	display: flex;
+    justify-content: space-between;
+}
+
+.navigation-starwars .nav-pills .nav-link:focus{
+	outline: none;	
+}
