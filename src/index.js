@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './customTheme.css';
-import './bootstrap.min.css';
-import './styles.scss';
-
-import App from './components/app';
 import { BrowserRouter } from 'react-router-dom';
+import App from './components/app';
+
+import './index.css';
 
 
 ReactDOM.render((

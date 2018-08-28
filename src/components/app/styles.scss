@@ -1,11 +1,11 @@
 
-@font-face {
+/* @font-face {
     font-family: 'StarJediHollow';
     src: url('../assets/fonts/Star_Jedi_font/StarJediHollow.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
+ */
 @keyframes move {
 	0% {
 		transform: translateY(0);
@@ -94,7 +94,7 @@
 .stage {
 	position: relative;
 	height: 350px;
-	background-image: url('../assets/img/space_640.png');
+	background-image: url('../../img/space_640.png');
 	overflow: hidden;
 	border: 1px solid #1c1e22;
 	border-radius: 8px;

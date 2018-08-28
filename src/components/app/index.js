@@ -8,22 +8,28 @@ import Films from '.././films';
 import Film from '.././film';
 import Characters from '.././characters';
 
+import './bootstrap.scss';
+import './styles.scss';
+import './customTheme.scss';
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/films" component={Films} />
-            <Route path="/films/:id" component={Film} />
-            <Route path="/characters" component={Characters} />
-          </Switch>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="app">
+				<div className="container">
+					<Header />
+					<main>
+						<Switch>
+							<Route exact path="/" component={Home} />
+							<Route exact path="/films" component={Films} />
+							<Route path="/films/:id" component={Film} />
+							<Route path="/characters" component={Characters} />
+						</Switch>
+					</main>
+				</div>
+			</div>
+    	);
+	}
 }
 
 export default App;

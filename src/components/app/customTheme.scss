@@ -1,6 +1,5 @@
 body {
 	color: #ffe81f;
-	background-color: red;
 }
 
 .text-muted {
@@ -16,11 +15,19 @@ body {
 	border: none;
 }
 
-.nav-pills .nav-link.active, 
+.nav-item .nav-link {
+	color: #ffe81f;
+	
+}
+.nav-item .nav-link:hover,
+.nav-item .nav-link--active {
+	background-color: #ffe81f;
+}
+/* .nav-pills .nav-link.active, 
 .nav-pills .show>.nav-link {
 	color: #ffe81f;
     background-color: #ffe81f;
-}
+} */
 
 .dropdown-item {
 	color: #ffe81f;
