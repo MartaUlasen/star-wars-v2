@@ -7,7 +7,6 @@ const getHrefId = (href) => {
 class FilmCard extends Component {
 
     render() {
-		console.log(this.props.data)
 		const path = "/films/" + getHrefId(this.props.data.url);
         return (
 			<div className="col-sm-4 mb-3">

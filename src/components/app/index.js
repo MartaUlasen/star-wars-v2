@@ -7,6 +7,7 @@ import Home from '.././home';
 import Films from '.././films';
 import Film from '.././film';
 import Characters from '.././characters';
+import Character from '.././character';
 
 import './bootstrap.scss';
 import './styles.scss';
@@ -23,7 +24,8 @@ class App extends Component {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/films" component={Films} />
 							<Route path="/films/:id" component={Film} />
-							<Route path="/characters" component={Characters} />
+							<Route exact path="/characters" component={Characters} />
+							<Route path="/characters/:id" component={Character} />
 						</Switch>
 					</main>
 				</div>
