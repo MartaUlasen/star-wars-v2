@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './app.css';
 import Header from '.././header';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Home from '.././home';
 import Films from '.././films';

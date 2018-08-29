@@ -31,15 +31,15 @@ class Films extends Component {
 	}
 
 	render() {
-    	const { films, isLoading, error, } = this.state;
+    	const { films, isLoading } = this.state;
 
 		return (
-			<div>
+			<div className="row">
 				{this.renderError()}
 				{isLoading
 					? <Loader className="icon-loading" font={20} />
-					: films.map(film => {
-						return <FilmCard key={film.episode_id} data={film} />
+					: films.map((film, index) => {
+						return <FilmCard key={film.episode_id} data={film}/>
 					})
 				}
 			</div>
