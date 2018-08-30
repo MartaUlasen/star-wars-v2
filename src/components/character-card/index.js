@@ -14,7 +14,7 @@ class CharacterCard extends Component {
         return (
 			<div className="col-sm-4 mb-3">
 				<Link to={path} className="card well chatacter-card">
-					<User className="icon-user" font={80} />
+					<User className="icon-user" size={40} />
 					<div className="card-body card-chatacter-body">
 						<h4 className="card-chatacter-title js-character-name">{character.name}</h4>
 					</div>

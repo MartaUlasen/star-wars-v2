@@ -37,7 +37,7 @@ class Characters extends Component {
 			<div className="row">
 				{this.renderError()}
 				{isLoading
-					? <Loader className="icon-loading" font={20} />
+					? <Loader className="icon-loading" size={20} />
 					: people.map((character, index) => {
 						return <CharacterCard key={index} data={character}/>
 					})

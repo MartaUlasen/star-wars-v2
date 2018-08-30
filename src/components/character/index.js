@@ -40,7 +40,7 @@ class Character extends Component {
 					<tbody>
 						<tr className="row">
 							<td className="col-4 col-md-3 col-lg-2">
-								<User className="icon-user" font={80} />
+								<User className="icon-user" size={80} />
 							</td>
 							<td className="js-director col-8 col-md-9 col-lg-10" >{character.name}</td>
 						</tr>
@@ -65,7 +65,7 @@ class Character extends Component {
 			<div>
 				{this.renderError()}
 				{isLoading
-					? <Loader className="icon-loading" font={20} />
+					? <Loader className="icon-loading" size={20} />
 					: this.rederCharacter()
 				}
 			</div>				

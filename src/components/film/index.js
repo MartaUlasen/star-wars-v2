@@ -7,8 +7,9 @@ class Film extends Component {
 		film: [],
 		isLoading: false,
 		error: null,
+		characters: [],
 	}
-	
+
     componentDidMount() {
 		this.setState({ isLoading: true  });
 		const url = 'https://swapi.co/api/films/' + this.state.id + '/';
@@ -19,12 +20,31 @@ class Film extends Component {
 			})
 			.then(data => {
 				this.setState({ isLoading: false, film: data });
+				return data;
 			})
+			.then(this.getCaracters)
 			.catch(error => {
 				this.setState({ isLoading: false, error });
 			})
 	}
 	
+	getCaracters = ({ characters }) => {
+		const characterPromises = characters.map(url =>
+			fetch(url)
+				.then(response => {
+					return response.json();
+				})
+		);
+
+		Promise.all(characterPromises)
+			.then(characters => { 
+				this.setState({ characters });
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}
+
 	renderError() {
 		if (this.state.error) {
 			return <p>Failed to load film data</p>
@@ -32,7 +52,7 @@ class Film extends Component {
 	}
 
 	rederFilm() {
-		const film = this.state.film;
+		const {film, characters} = this.state;
 
 		return (
 			<div className="film">
@@ -58,7 +78,11 @@ class Film extends Component {
 						<tr className="row">
 							<td className="col-4 col-md-3 col-lg-2">Characters:</td>
 							<td className="col-8 col-md-9 col-lg-10">
-								<ul className="characters"></ul>
+								<ul className="characters">
+									{characters.map(character => {
+										return <li>{character.name}</li>
+									})}
+								</ul>
 							</td>
 						</tr>
 					</tbody>

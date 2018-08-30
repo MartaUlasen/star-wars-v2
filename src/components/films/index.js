@@ -37,7 +37,7 @@ class Films extends Component {
 			<div className="row">
 				{this.renderError()}
 				{isLoading
-					? <Loader className="icon-loading" font={40} />
+					? <Loader className="icon-loading" size={20} />
 					: films.map((film, index) => {
 						return <FilmCard key={film.episode_id} data={film}/>
 					})
