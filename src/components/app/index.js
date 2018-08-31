@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './app.css';
+import './app.scss';
 import Header from '.././header';
 import { Switch, Route } from 'react-router-dom';
 
@@ -9,15 +9,13 @@ import Film from '.././film';
 import Characters from '.././characters';
 import Character from '.././character';
 
-import './bootstrap.scss';
 import './styles.scss';
-import './customTheme.scss';
 
 class App extends Component {
 	render() {
 		return (
 			<div className="app">
-				<div className="container">
+				<div className="wrapper">
 					<Header />
 					<main>
 						<Switch>

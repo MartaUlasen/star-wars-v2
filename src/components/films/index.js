@@ -32,7 +32,7 @@ class Films extends Component {
 
 	render() {
     	const { films, isLoading } = this.state;
-
+		
 		return (
 			<div className="row">
 				{this.renderError()}

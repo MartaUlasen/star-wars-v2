@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CharacterCard from '.././character-card';
+import Pagination from '.././pagination';
 import { Loader } from 'react-feather';
 
 class Characters extends Component {
@@ -7,21 +8,31 @@ class Characters extends Component {
 		people: [],
 		isLoading: false,
 		error: null,
+		previous: null,
+		next: null,
 	}
 
-	componentDidMount() {
+	getCharacters = (url) => {
 		this.setState({ isLoading: true  });
-
-		fetch('https://swapi.co/api/people/')
+		fetch(url)
 			.then(response => {
 				return response.json();
 			})
 			.then(data => {
-				this.setState({ isLoading: false, people: data.results });
+				this.setState({ isLoading: false, people: data.results, previous: data.previous, next: data.next });
+				console.log(this.state.previous, this.state.next )
 			})
 			.catch(error => {
 				this.setState({ isLoading: false, error });
 			})
+	}
+
+	componentDidMount() {
+		this.getCharacters('https://swapi.co/api/people/');
+	}
+
+	changeFilms = () => {
+
 	}
 	
 	renderError() {
@@ -30,19 +41,29 @@ class Characters extends Component {
 		}
 	}
 
-	render() {
-    	const { people, isLoading } = this.state;
+	renderPagination = (previous, next) => {
+		if((previous !== null) || (next !== null)) {
+			return <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+		}
+	}
 
+	render() {
+    	const { people, isLoading, previous, next } = this.state;
+		console.log(this.state.previous, this.state.next )
 		return (
-			<div className="row">
-				{this.renderError()}
-				{isLoading
-					? <Loader className="icon-loading" size={20} />
-					: people.map((character, index) => {
-						return <CharacterCard key={index} data={character}/>
-					})
-				}
-			</div>
+			<React.Fragment>
+				<div className="row">
+					{this.renderError()}
+					{isLoading
+						? <Loader className="icon-loading" size={20} />
+						: people.map((character, index) => {
+							return <CharacterCard key={index} data={character}/>
+						})
+					}
+				</div>
+				{this.renderPagination(previous, next)}
+			</React.Fragment>
+			
 		)
 	}
 }

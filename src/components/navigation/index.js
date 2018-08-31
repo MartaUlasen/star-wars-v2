@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import './navigation.scss';
 
 class Navigation extends Component {
 	render() {
 		return (
 			<nav className="navigation-starwars">
-				<ul className="nav nav-pills menu">
-					<li className="nav-item">
-						<NavLink to="/" className="nav-link home" activeClassName="nav-link--active" exact>Home</NavLink>
+				<ul className="nav menu">
+					<li>
+						<NavLink to="/" className="link home" activeClassName="link--active" exact>Home</NavLink>
 					</li>
-					<li className="nav-item">
-						<NavLink to="/films" className="nav-link" activeClassName="nav-link--active">Films</NavLink>
+					<li>
+						<NavLink to="/films" className="link" activeClassName="link--active">Films</NavLink>
 					</li>
-					<li className="nav-item">
-						<NavLink to="/characters" className="nav-link" activeClassName="nav-link--active">Characters</NavLink>
+					<li>
+						<NavLink to="/characters" className="link" activeClassName="link--active">Characters</NavLink>
 					</li>
 				</ul>
 			</nav>

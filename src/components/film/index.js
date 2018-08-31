@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Loader } from 'react-feather';
+import './film.scss';
 
 class Film extends Component {
 	state = {
@@ -88,6 +89,7 @@ class Film extends Component {
 					</tbody>
 				</table>
 				<div className="stage">
+					<div className="stage__perspective"></div>
 					<div className="stage__crawl-text">{film.opening_crawl}</div>
 				</div>
 			</div>
