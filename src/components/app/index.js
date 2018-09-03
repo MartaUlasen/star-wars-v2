@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './app.scss';
 import Header from '.././header';
 import { Switch, Route } from 'react-router-dom';
 
@@ -9,7 +8,9 @@ import Film from '.././film';
 import Characters from '.././characters';
 import Character from '.././character';
 
-import './styles.scss';
+import './app.scss';
+import './blocks/card.scss';
+//import './bootstrap.scss';
 
 class App extends Component {
 	render() {

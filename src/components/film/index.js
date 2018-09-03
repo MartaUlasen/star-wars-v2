@@ -57,31 +57,31 @@ class Film extends Component {
 
 		return (
 			<div className="film">
-				<h4 className="film-title">
+				<h4 className="film__title">
 					Episode
-					<span className="film-episode">{film.episode_id}</span>:
-					<span className="ext-uppercase film-title">{film.title}</span>
+					<span className="film__episode">{film.episode_id}</span>:
+					<span className="film__name uppercase">{film.title}</span>
 				</h4>
-				<table className="table table-striped table-hover table-bordered">
+				<table className="table">
 					<tbody>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Director:</td>
-							<td className="js-director col-8 col-md-9 col-lg-10" >{film.director}</td>
+						<tr className="table__row">
+							<td>Director:</td>
+							<td>{film.director}</td>
 						</tr>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Produser:</td>
-							<td className="col-8 col-md-9 col-lg-10">{film.producer}</td>
+						<tr className="table__row">
+							<td>Produser:</td>
+							<td>{film.producer}</td>
 						</tr>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Date of reliase:</td>
-							<td className="col-8 col-md-9 col-lg-10">{film.release_date}</td>
+						<tr className="table__row">
+							<td>Date of reliase:</td>
+							<td>{film.release_date}</td>
 						</tr>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Characters:</td>
-							<td className="col-8 col-md-9 col-lg-10">
-								<ul className="characters">
-									{characters.map(character => {
-										return <li>{character.name}</li>
+						<tr className="table__row">
+							<td>Characters:</td>
+							<td>
+								<ul className="film__characters">
+									{characters.map((character, index) => {
+										return <li key={index}>{character.name}</li>
 									})}
 								</ul>
 							</td>

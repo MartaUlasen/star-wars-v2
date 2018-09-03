@@ -1,0 +1,52 @@
+.film__title {
+	padding-left: 4px;
+}
+
+.film__episode,
+.film__name {
+	padding: 0 4px;
+}
+
+.film__characters {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	li {
+		margin-right: 0.5em;
+		&:last-child {
+			margin-right: 0;
+		}
+		&:not(:last-child):after {
+			content: ',';
+		}
+	}
+}
+
+table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #1c1e22;
+	border-collapse: collapse;
+	font-size: 0.875rem;
+	&__row {
+		display: flex;
+	}
+	tr {
+		&:nth-of-type(odd) {
+			background-color: #353a41;
+		}
+	}
+	td {
+		padding: 8px;
+		line-height: 1rem;
+		&:nth-of-type(odd) {
+			width: 120px;;
+		}
+	}
+}
+
+.uppercase {
+	text-transform: uppercase;
+}

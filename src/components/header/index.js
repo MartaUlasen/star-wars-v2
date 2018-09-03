@@ -7,16 +7,13 @@ import Logo from '../../icons/logo';
 class Header extends Component {
 	render() {
 		return (
-			<header>
-				<div className="">
-					<div className="logo mx-auto">
-						<Link to="/">
-							<Logo />
-						</Link>
-					</div>
-						<Navigation />
-						
-					</div>
+			<header className="header">
+				<div className="logo mx-auto">
+					<Link to="/">
+						<Logo />
+					</Link>
+				</div>
+				<Navigation />
 			</header>
 		);
 	}

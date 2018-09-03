@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CharacterCard from '.././character-card';
-import Pagination from '.././pagination';
+//import Pagination from '.././pagination';
 import { Loader } from 'react-feather';
 
 class Characters extends Component {
@@ -43,7 +43,7 @@ class Characters extends Component {
 
 	renderPagination = (previous, next) => {
 		if((previous !== null) || (next !== null)) {
-			return <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+			//return <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
 		}
 	}
 
@@ -55,7 +55,7 @@ class Characters extends Component {
 				<div className="row">
 					{this.renderError()}
 					{isLoading
-						? <Loader className="icon-loading" size={20} />
+						? <Loader className="icon-loading" size={30} />
 						: people.map((character, index) => {
 							return <CharacterCard key={index} data={character}/>
 						})
