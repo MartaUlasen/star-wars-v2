@@ -10,6 +10,7 @@ import Character from '.././character';
 
 import './app.scss';
 import './blocks/card.scss';
+import './blocks/buttons.scss';
 //import './bootstrap.scss';
 
 class App extends Component {

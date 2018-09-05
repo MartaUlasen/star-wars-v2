@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigation.scss';
+//import './navigation.scss';
 
 class Navigation extends Component {
 	render() {
