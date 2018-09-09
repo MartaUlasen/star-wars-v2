@@ -51,7 +51,7 @@ class Characters extends Component {
     	const { people, isLoading, previous, next } = this.state;
 		return (
 			<React.Fragment>
-				<div className="row">
+				<ul className="grid">
 					{this.renderError()}
 					{isLoading
 						? <Loader className="icon-loading" size={30} />
@@ -59,7 +59,7 @@ class Characters extends Component {
 							return <CharacterCard key={index} data={character}/>
 						})
 					}
-				</div>
+				</ul>
 				{this.renderPagination(previous, next)}
 			</React.Fragment>
 			

@@ -8,7 +8,7 @@ class Header extends Component {
 	render() {
 		return (
 			<header className="header">
-				<div className="logo mx-auto">
+				<div className="logo">
 					<Link to="/">
 						<Logo />
 					</Link>

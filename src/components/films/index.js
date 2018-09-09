@@ -57,7 +57,7 @@ class Films extends Component {
 		return (
 			<React.Fragment>
 				<Sorter getFilms={this.getFilms}/>
-				<div className="row">
+				<ul className="grid">
 					{this.renderError()}
 					{isLoading
 						? <Loader className="icon-loading" size={30} />
@@ -65,7 +65,7 @@ class Films extends Component {
 							return <FilmCard key={film.episode_id} data={film}/>
 						})
 					}
-				</div>
+				</ul>
 			</React.Fragment>
 			
 		)
