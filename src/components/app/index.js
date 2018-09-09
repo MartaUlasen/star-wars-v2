@@ -11,7 +11,7 @@ import Character from '.././character';
 import './app.scss';
 import './blocks/card.scss';
 import './blocks/buttons.scss';
-//import './bootstrap.scss';
+import './blocks/base.scss';
 
 class App extends Component {
 	render() {
