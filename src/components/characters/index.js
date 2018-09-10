@@ -48,18 +48,18 @@ class Characters extends Component {
 	}
 
 	render() {
-    	const { people, isLoading, previous, next } = this.state;
+		const { people, isLoading, previous, next } = this.state;
+		let template = null;
+		isLoading ? template = <Loader className="icon-loading" size={30} /> :
+		template = <ul className="grid">
+			{people.map((character, index) => {
+				return <CharacterCard key={index} data={character}/>
+			})}
+		</ul>
 		return (
 			<React.Fragment>
-				<ul className="grid">
-					{this.renderError()}
-					{isLoading
-						? <Loader className="icon-loading" size={30} />
-						: people.map((character, index) => {
-							return <CharacterCard key={index} data={character}/>
-						})
-					}
-				</ul>
+				{this.renderError()}
+				{template}
 				{this.renderPagination(previous, next)}
 			</React.Fragment>
 			

@@ -53,21 +53,20 @@ class Films extends Component {
 	}
 
 	render() {
-    	const { films, isLoading } = this.state;
+		const { films, isLoading } = this.state;
+		let template = null;
+		isLoading ? template = <Loader className="icon-loading" size={30} /> :
+		template = <ul className="grid">
+			{films.map((film, index) => {
+				return <FilmCard key={film.episode_id} data={film}/>
+			})}
+		</ul>
 		return (
 			<React.Fragment>
 				<Sorter getFilms={this.getFilms}/>
-				<ul className="grid">
-					{this.renderError()}
-					{isLoading
-						? <Loader className="icon-loading" size={30} />
-						: films.map((film, index) => {
-							return <FilmCard key={film.episode_id} data={film}/>
-						})
-					}
-				</ul>
+				{this.renderError()}
+				{template}
 			</React.Fragment>
-			
 		)
 	}
 }
