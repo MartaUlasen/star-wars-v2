@@ -5,7 +5,6 @@ class Pagination extends Component {
 		this.props.getCharacters(url);
 	}
 	render() {
-		console.log(this.props.previous,this.props.next)
 		return (
 			<div className="pagination">
 				<button 

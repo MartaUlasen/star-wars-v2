@@ -4,7 +4,7 @@ import Pagination from '.././pagination';
 import { Loader } from 'react-feather';
 
 class Characters extends Component {
-	state = {				
+	state = {
 		people: [],
 		isLoading: false,
 		error: null,
@@ -12,27 +12,23 @@ class Characters extends Component {
 		next: null,
 	}
 
+	componentDidMount() {
+		this.getCharacters('https://swapi.co/api/people/');
+	}
+
 	getCharacters = (url) => {
 		this.setState({ isLoading: true  });
+
 		fetch(url)
 			.then(response => {
 				return response.json();
 			})
 			.then(data => {
 				this.setState({ isLoading: false, people: data.results, previous: data.previous, next: data.next });
-				console.log(this.state.previous, this.state.next )
 			})
 			.catch(error => {
 				this.setState({ isLoading: false, error });
 			})
-	}
-
-	componentDidMount() {
-		this.getCharacters('https://swapi.co/api/people/');
-	}
-
-	changeFilms = () => {
-
 	}
 	
 	renderError() {
@@ -49,20 +45,23 @@ class Characters extends Component {
 
 	render() {
 		const { people, isLoading, previous, next } = this.state;
-		let template = null;
-		isLoading ? template = <Loader className="icon-loading" size={30} /> :
-		template = <ul className="grid">
-			{people.map((character, index) => {
-				return <CharacterCard key={index} data={character}/>
-			})}
-		</ul>
+		
 		return (
-			<React.Fragment>
+			<div>
 				{this.renderError()}
-				{template}
+				{
+					isLoading
+					? <Loader className="icon-loading" size={30} />
+					: <ul className="grid">
+						{people.map((character, index) => {
+							return <li className="grid__item" key={index}>
+										<CharacterCard data={character}/>
+									</li>
+						})}
+					</ul>	
+				}
 				{this.renderPagination(previous, next)}
-			</React.Fragment>
-			
+			</div>
 		)
 	}
 }
