@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ChevronLeft, ChevronRight } from 'react-feather';
 
 class Pagination extends Component {
 	btnHandler = (url) => {
@@ -9,19 +10,19 @@ class Pagination extends Component {
 			<div className="pagination">
 				<button 
 					type="button" 
-					className="btn" 
+					className="pagination__item" 
 					disabled={this.props.previous === null}
 					onClick={() => {this.btnHandler(this.props.previous)}}
 				>
-					Previous
+					<ChevronLeft/>Previous
 				</button>
 				<button 
 					type="button" 
-					className="btn" 
+					className="pagination__item" 
 					disabled={this.props.next === null}
 					onClick={() => {this.btnHandler(this.props.next)}}
 				>
-					Next
+					Next<ChevronRight/>
 				</button>
 			</div>
 		);

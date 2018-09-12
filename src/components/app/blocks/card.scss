@@ -7,33 +7,18 @@
 	word-wrap: break-word;
 	background-color: #32383e;
 	background-clip: border-box;
-	color: #ffe81f;
-	border: 1px solid rgba(0, 0, 0, 0.6);
-	border-radius: 0.25rem;
+	color: rgba(255, 232, 31, 0.8);;
 	text-decoration: none;
+	background-color: color 0.2s ease-in;
 	&:hover {
 		text-decoration: none;
-		color: #ffe81f;
+		color: rgba(255, 232, 31, 0.8);;
+		background-color: rgba(50, 56, 62, 0.5);
 	}
 }
 .card {
-	&:hover {
-		.left-angle:before {
-			transform: translateX(-66.666%);
-		}
-		.left-angle:after {
-			transform: translateY(66.666%);
-		}
-		.right-angle:before {
-			transform: translateX(66.666%);
-		}
-		.right-angle:after {
-			transform: translateY(-66.666%);
-		}
-	}
 	&:focus {
-		box-shadow: 0 0 10px #ffe81f;
-		border-radius: 4px;
+		box-shadow: 0 0 10px rgba(255, 232, 31, 0.8);;
 		outline: none;		
 	}	
 }

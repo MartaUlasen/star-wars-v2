@@ -16,8 +16,6 @@ class FilmCard extends Component {
 					<p>Director: {this.props.data.director}</p>
 					<p><small className="text-muted">{this.props.data.release_date}</small></p>
 				</div>
-				<div className="left-angle"></div>
-				<div className="right-angle"></div>
 			</Link>
 		);
 	}

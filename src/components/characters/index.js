@@ -49,6 +49,7 @@ class Characters extends Component {
 		return (
 			<div>
 				{this.renderError()}
+				{this.renderPagination(previous, next)}
 				{
 					isLoading
 					? <Loader className="icon-loading" size={30} />
@@ -60,7 +61,7 @@ class Characters extends Component {
 						})}
 					</ul>	
 				}
-				{this.renderPagination(previous, next)}
+				
 			</div>
 		)
 	}
