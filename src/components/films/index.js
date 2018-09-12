@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FilmCard from '.././film-card';
-import Sorter from '.././sorter';
+import Sorter from './sorter';
 import { Loader } from 'react-feather';
 
 const compareReleaseDate = (film1, film2) => {

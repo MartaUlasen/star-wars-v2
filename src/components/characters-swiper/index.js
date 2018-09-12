@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import CharacterCard from '.././character-card';
-import Pagination from './pagination';
+import Swiper from '.././swiper';
+import 'swiper/dist/css/swiper.min.css';
 import { Loader } from 'react-feather';
 
-class Characters extends Component {
+class CharactersSwiper extends Component {
 	state = {
 		people: [],
 		isLoading: false,
 		error: null,
-		previous: null,
-		next: null,
 	}
 
 	componentDidMount() {
@@ -37,33 +36,24 @@ class Characters extends Component {
 		}
 	}
 
-	renderPagination = (previous, next) => {
-		if((previous !== null) || (next !== null)) {
-			return <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
-		}
-	}
-
 	render() {
-		const { people, isLoading, previous, next } = this.state;
-		
+		const { people, isLoading } = this.state;
+		const children = people.map((character, index) => {
+			return (<div key={index}>
+				<CharacterCard data={character}/>
+			</div>)
+		});
 		return (
-			<div>
+			<div className="swiper">
 				{this.renderError()}
 				{
 					isLoading
-					? <Loader className="icon-loading" size={30} />
-					: <ul className="grid">
-						{people.map((character, index) => {
-							return <li className="grid__item" key={index}>
-										<CharacterCard data={character}/>
-									</li>
-						})}
-					</ul>	
+						? <Loader className="icon-loading" size={30} />
+						: <Swiper children={children}/>
 				}
-				{this.renderPagination(previous, next)}
 			</div>
-		)
+        )
 	}
 }
 
-export default Characters;
+export default CharactersSwiper;

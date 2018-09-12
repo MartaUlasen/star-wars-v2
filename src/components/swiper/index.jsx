@@ -9,10 +9,6 @@ const SLIDER_PARAMS = {
 	slidesPerGroup: 1,
 	loop: true,
 	loopFillGroupWithBlank: true,
-	pagination: {
-		el: '.swiper-pagination',
-		clickable: true,
-	}
 };
 
 class Swiper extends Component {
@@ -33,7 +29,7 @@ class Swiper extends Component {
 	
 	render() {
 		return (
-			<div className="swiper">
+			<React.Fragment>
 				<button 
 					className="swiper__button prev" 
 					type="button"
@@ -46,7 +42,7 @@ class Swiper extends Component {
 					onClick={this.goNext}>
 				</button>
 				
-			</div>
+			</React.Fragment>
 		)
 	}
 }

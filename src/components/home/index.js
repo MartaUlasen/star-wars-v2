@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import FilmsSwiper from '.././films-swiper';
+import CharactersSwiper from '.././characters-swiper';
 
 class Home extends Component {
 	render() {
 		return (
-			<FilmsSwiper />
+			<div>
+				<FilmsSwiper />
+				<CharactersSwiper />
+			</div>
+			
 		)
 	}
 }

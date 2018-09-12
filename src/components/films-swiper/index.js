@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FilmCard from '.././film-card';
 import Swiper from '.././swiper';
-import 'swiper/dist/css/swiper.min.css';
 import { Loader } from 'react-feather';
 
 const compareNumberOfEpisode = (film1, film2) => {
@@ -49,7 +48,7 @@ class FilmsSwiper extends Component {
 			</div>)
 		});
 		return (
-			<div>
+			<div className="swiper">
 				{this.renderError()}
 				{
 					isLoading
