@@ -5,7 +5,7 @@ import CharactersSwiper from '.././characters-swiper';
 class Home extends Component {
 	render() {
 		return (
-			<div>
+			<div className="home wrapper">
 				<FilmsSwiper />
 				<CharactersSwiper />
 			</div>

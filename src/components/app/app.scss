@@ -15,6 +15,7 @@ h4 {
 
 main {
 	display: block;
+	padding: 12px 0;
 }
 
 .wrapper {
@@ -156,4 +157,8 @@ tbody > .row {
 
 .carousel-item img {
 	width: 350px;
+}
+
+.navigation {
+	background-color: #32383e;
 }

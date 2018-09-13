@@ -14,8 +14,6 @@ const compareNumberOfEpisode = (film1, film2) => {
 	return film1.episode_id - film2.episode_id;
 }
 
-const sorter = 'Number of episode';
-
 class Films extends Component {
 	state = {
 		films: [],
@@ -24,10 +22,20 @@ class Films extends Component {
 	}
 
 	componentDidMount = () => {
-		this.getFilms(sorter);
+		this.getFilms();
 	}
 
-	getFilms = (value) => {
+	sort = (value) => {
+		const films = this.state.films;
+		if (value === 'Number of episode') {
+			films.sort(compareNumberOfEpisode);
+		} else {
+			films.sort(compareReleaseDate);
+		}
+		this.setState({ films });
+	}
+
+	getFilms = () => {
 		this.setState({ isLoading: true  });
 
 		fetch('https://swapi.co/api/films/')
@@ -35,11 +43,8 @@ class Films extends Component {
 				return response.json();
 			})
 			.then(data => {
-				if (value === 'Number of episode') {
-					data.results.sort(compareNumberOfEpisode);
-				} else data.results.sort(compareReleaseDate);
-				
-				this.setState({ isLoading: false, films: data.results });
+				const films = data.results.sort(compareNumberOfEpisode);
+				this.setState({ isLoading: false, films });
 			})
 			.catch(error => {
 				this.setState({ isLoading: false, error });
@@ -56,8 +61,8 @@ class Films extends Component {
 		const { films, isLoading } = this.state;
 
 		return (
-			<div>
-				<Sorter getFilms={this.getFilms}/>
+			<div className="wrapper">
+				<Sorter sort={this.sort}/>
 				{this.renderError()}
 				{
 					isLoading

@@ -47,7 +47,7 @@ class Characters extends Component {
 		const { people, isLoading, previous, next } = this.state;
 		
 		return (
-			<div>
+			<div className="wrapper">
 				{this.renderError()}
 				{this.renderPagination(previous, next)}
 				{

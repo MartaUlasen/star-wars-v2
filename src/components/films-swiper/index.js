@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FilmCard from '.././film-card';
 import Swiper from '.././swiper';
 import { Loader } from 'react-feather';
+import './films-swiper.scss';
 
 const compareNumberOfEpisode = (film1, film2) => {
 	return film1.episode_id - film2.episode_id;
@@ -48,14 +49,18 @@ class FilmsSwiper extends Component {
 			</div>)
 		});
 		return (
-			<div className="swiper">
-				{this.renderError()}
-				{
-					isLoading
-						? <Loader className="icon-loading" size={30} />
-						: <Swiper children={children}/>
-				}
+			<div className="films-swiper">
+				<div className="films-swiper__title">Films</div>
+				<div className="swiper">
+					{this.renderError()}
+					{
+						isLoading
+							? <Loader className="icon-loading" size={30} />
+							: <Swiper children={children}/>
+					}
+				</div>
 			</div>
+			
         )
 	}
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Sorter extends Component {
 	selectHandler = (e) => {
-		this.props.getFilms(e.target.value);
+		this.props.sort(e.target.value);
 	}
 	render() {
 		return (

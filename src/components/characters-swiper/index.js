@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import CharacterCard from '.././character-card';
 import Swiper from '.././swiper';
-import 'swiper/dist/css/swiper.min.css';
 import { Loader } from 'react-feather';
+//import 'swiper/dist/css/swiper.min.css';
+import './characters-swiper.scss';
 
 class CharactersSwiper extends Component {
 	state = {
@@ -44,13 +45,16 @@ class CharactersSwiper extends Component {
 			</div>)
 		});
 		return (
-			<div className="swiper">
-				{this.renderError()}
-				{
-					isLoading
-						? <Loader className="icon-loading" size={30} />
-						: <Swiper children={children}/>
-				}
+			<div className="characters-swiper">
+				<div className="characters-swiper__title">Characters</div>
+				<div className="swiper">
+					{this.renderError()}
+					{
+						isLoading
+							? <Loader className="icon-loading" size={30} />
+							: <Swiper children={children}/>
+					}
+				</div>
 			</div>
         )
 	}
