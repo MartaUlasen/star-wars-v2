@@ -2,6 +2,13 @@
 	display: flex;
 	padding: 0;
 	list-style: none;
+	&__item {
+		padding-left: 0;
+		padding-right: 16px;
+		&:last-child {
+			padding-right: 0;
+		}
+	}
 }
 
 .pagination {
@@ -47,21 +54,14 @@
 	}
 }
 
-.link {
-	padding-left: 0;
-	padding-right: 24px;
-	&:last-child {
-		padding-right: 0;
-	}
-	&--active {
-		font-weight: bold;
-	}
+.link--active {
+	font-weight: 700;
 }
 
 .sorter {
-	margin-bottom: 8px;
+	padding-bottom: 0;
 	.option {
-		padding: 8px 12px;
+		padding: 0 12px;
 		font-size: 1rem;
 		text-decoration: none;
 		color: #ffe81f;

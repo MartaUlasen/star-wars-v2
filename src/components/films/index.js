@@ -63,18 +63,19 @@ class Films extends Component {
 		return (
 			<div className="wrapper">
 				<Sorter sort={this.sort}/>
-				{this.renderError()}
-				{
-					isLoading
-					? <Loader className="icon-loading" size={30} />
-					: <ul className="grid">
-						{films.map((film) => {
-							return <li className="grid__item" key={film.episode_id}>
-										<FilmCard  data={film}/>
-									</li>
-						})}
-					</ul>
-				}
+				<hr className="separator" noshade="true"/>
+					{this.renderError()}
+					{
+						isLoading
+						? <Loader className="icon-loading" size={30} />
+						: <ul className="grid">
+							{films.map((film) => {
+								return <li className="grid__item" key={film.episode_id}>
+											<FilmCard  data={film}/>
+										</li>
+							})}
+						</ul>
+					}				
 			</div>
 		)
 	}

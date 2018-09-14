@@ -39,7 +39,9 @@ class Characters extends Component {
 
 	renderPagination = (previous, next) => {
 		if((previous !== null) || (next !== null)) {
-			return <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+			return  <div className="wrapper">
+						<Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+					</div>
 		}
 	}
 
@@ -50,18 +52,18 @@ class Characters extends Component {
 			<div className="wrapper">
 				{this.renderError()}
 				{this.renderPagination(previous, next)}
+				<hr className="separator" noshade="true"/>
 				{
 					isLoading
 					? <Loader className="icon-loading" size={30} />
-					: <ul className="grid">
-						{people.map((character, index) => {
-							return <li className="grid__item" key={index}>
-										<CharacterCard data={character}/>
-									</li>
-						})}
-					</ul>	
+					:	<ul className="grid">
+							{people.map((character, index) => {
+								return  <li className="grid__item" key={index}>
+											<CharacterCard data={character}/>
+										</li>
+							})}
+						</ul>		
 				}
-				
 			</div>
 		)
 	}
