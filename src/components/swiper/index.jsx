@@ -9,7 +9,7 @@ const SLIDER_PARAMS = {
 	spaceBetween: 30,
 	slidesPerGroup: 1,
 	loop: true,
-	loopFillGroupWithBlank: true,
+	//loopFillGroupWithBlank: true,
 };
 
 class Swiper extends Component {

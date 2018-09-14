@@ -62,6 +62,7 @@ class Films extends Component {
 
 		return (
 			<div className="wrapper">
+				<div className="title">Films</div>
 				<Sorter sort={this.sort}/>
 				<hr className="separator" noshade="true"/>
 					{this.renderError()}

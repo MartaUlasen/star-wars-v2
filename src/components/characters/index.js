@@ -50,6 +50,7 @@ class Characters extends Component {
 		
 		return (
 			<div className="wrapper">
+				<div className="title">Characters</div>
 				{this.renderError()}
 				{this.renderPagination(previous, next)}
 				<hr className="separator" noshade="true"/>

@@ -50,7 +50,7 @@ class FilmsSwiper extends Component {
 		});
 		return (
 			<div className="films-swiper">
-				<div className="films-swiper__title">Films</div>
+				<div className="title">Films</div>
 				<div className="swiper">
 					{this.renderError()}
 					{

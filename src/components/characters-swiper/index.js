@@ -45,7 +45,7 @@ class CharactersSwiper extends Component {
 		});
 		return (
 			<div className="characters-swiper">
-				<div className="characters-swiper__title">Characters</div>
+				<div className="title">Characters</div>
 				<div className="swiper">
 					{this.renderError()}
 					{
