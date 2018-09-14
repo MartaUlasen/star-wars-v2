@@ -7,7 +7,7 @@ class Navigation extends Component {
 			<nav className="navigation wrapper">
 				<ul className="menu">
 					<li className="menu__item">
-						<NavLink to="/" className="link home" activeClassName="link--active" exact>Home</NavLink>
+						<NavLink to="/" className="link" activeClassName="link--active" exact>Home</NavLink>
 					</li>
 					<li className="menu__item">
 						<NavLink to="/films" className="link" activeClassName="link--active">Films</NavLink>

@@ -35,7 +35,7 @@ class Character extends Component {
 		const character = this.state.character;
 
 		return (
-			<div className="character">
+			<div className="character wrapper">
 				<table className="table table-striped table-hover table-bordered">
 					<tbody>
 						<tr className="row">

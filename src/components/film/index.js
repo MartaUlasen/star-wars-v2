@@ -56,7 +56,7 @@ class Film extends Component {
 		const {film, characters} = this.state;
 
 		return (
-			<div className="film">
+			<div className="film wrapper">
 				<h4 className="film__title">
 					Episode
 					<span className="film__episode">{film.episode_id}</span>:

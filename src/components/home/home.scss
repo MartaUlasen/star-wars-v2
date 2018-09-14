@@ -1,0 +1,16 @@
+.home {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.icon-r2d2,
+.icon-bb8 {
+	width: 200px;
+	height: 200px;
+	margin: 0 -16px;
+}
+
+.icon-bb8 {
+	transform: rotateY(180deg);
+	padding-bottom: 8px;
+}
