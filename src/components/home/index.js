@@ -14,7 +14,7 @@ class Home extends Component {
 					<Link to="characters/3">
 						<R2d2/>
 					</Link>
-					<Link to="characters/3">
+					<Link to="characters/87">
 						<Bb8 />
 					</Link>
 				</div>

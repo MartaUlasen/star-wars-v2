@@ -62,6 +62,24 @@ class Film extends Component {
 					<span className="film__episode">{film.episode_id}</span>:
 					<span className="film__name uppercase">{film.title}</span>
 				</h4>
+				<div className="grid">
+					<div className="grig__item">
+						<div>Director:</div>
+						<div>{film.director}</div>
+						<div>Produser:</div>
+						<div>{film.producer}</div>
+						<div>Date of reliase:</div>
+						<div>{film.release_date}</div>
+					</div>
+					<div className="grig__item">
+						<div>Characters:</div>
+						<ul className="film__characters">
+							{characters.map((character, index) => {
+								return <li key={index}>{character.name}</li>
+							})}
+						</ul>
+					</div>
+				</div>
 				<table className="table">
 					<tbody>
 						<tr className="table__row">
@@ -89,8 +107,9 @@ class Film extends Component {
 					</tbody>
 				</table>
 				<div className="stage">
-					<div className="stage__perspective"></div>
-					<div className="stage__crawl-text">{film.opening_crawl}</div>
+					<div className="stage__perspective">
+						<div className="stage__crawl-text">{film.opening_crawl}</div>
+					</div>
 				</div>
 			</div>
 		)

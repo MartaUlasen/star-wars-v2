@@ -61,16 +61,6 @@ main {
 	}
 }
 
-
-@keyframes move {
-	0% {
-		transform: translateY(0);
-	}
-	100% {
-		transform: translateY(calc(-350px - 100%));
-	}
-}
-
 .logo {
     width: 200px;
 	margin: 8px auto;
@@ -111,27 +101,9 @@ main {
 	margin-left: 4px;
 }
 
-.stage {
-	position: relative;
-	height: 350px;
-	background-image: url('../../img/space_640.png');
-	overflow: hidden;
-	border: 1px solid #1c1e22;
-	border-radius: 8px;
-}
 
-.stage__crawl-text {
-	position: relative;
-	top: 100%;
-	padding: 8px;
-	font-size: 24px;
-	text-align: center;
-	line-height: 1.6;
-	animation-name: move;
-	animation-duration: 20s;
-	animation-timing-function: linear;
-	animation-fill-mode: forwards;
-}
+
+
 
 .film-info {
 	border: 1px solid rgba(255, 232, 31, 0.8);

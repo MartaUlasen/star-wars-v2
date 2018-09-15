@@ -27,26 +27,69 @@
 table {
 	width: 100%;
 	margin-bottom: 20px;
-	border: 1px solid #1c1e22;
-	border-collapse: collapse;
 	font-size: 0.875rem;
+    background-color: #32383e;
 	&__row {
-		display: flex;
-	}
-	tr {
-		&:nth-of-type(odd) {
-			background-color: #353a41;
+		&:last-child {
+			height: 200px;
 		}
 	}
 	td {
-		padding: 8px;
+		padding: 12px;
 		line-height: 1rem;
-		&:nth-of-type(odd) {
-			width: 120px;;
-		}
+	}
+}
+
+.table__row {
+	&:last-child {
+		height: 100px;
 	}
 }
 
 .uppercase {
 	text-transform: uppercase;
+}
+
+.stage {
+	position: relative;
+	height: 350px;
+	background-image: url('../../img/space_640.png');
+	overflow: hidden;
+}
+
+.stage__perspective {
+	position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%;
+    height: 300rem;
+	font-size: 42px;
+	line-height: 1.6;
+	text-align: justify;
+    transform: translateX(-50%) perspective(230px) rotateX(28deg);
+    transform-origin: 50% 100%;
+
+}
+
+.stage__crawl-text {
+	position: absolute;
+	top: 100%;
+	animation-name: move;
+	animation-duration: 32s;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+
+@keyframes move {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	95% {
+		opacity: 0.95;
+	}
+	100% {
+		transform: translateY(calc(-180%));
+		opacity: 0;
+	}
 }
