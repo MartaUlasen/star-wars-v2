@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Loader } from 'react-feather';
+import qs from 'query-string';
 import CharacterCard from 'components/character-card';
 import Pagination from './pagination';
 
@@ -13,12 +14,22 @@ class Characters extends Component {
 	}
 
 	componentDidMount() {
-		this.getCharacters('https://swapi.co/api/people/');
+        const { location: { search } } = this.props;
+        const pageNum = qs.parse(search).page || '';
+		this.getCharacters(`https://swapi.co/api/people/?page=${pageNum}`);
 	}
 
 	getCharacters = (url) => {
-		this.setState({ isLoading: true  });
+        const { history, location: { pathname } } = this.props;
+        const pageNum = qs.parseUrl(url).query.page;
 
+        history.push({
+            pathname,
+            search: `?page=${pageNum}`
+        });
+
+        this.setState({ isLoading: true });
+        
 		fetch(url)
 			.then(response => {
 				return response.json();
@@ -38,11 +49,13 @@ class Characters extends Component {
 	}
 
 	renderPagination = (previous, next) => {
-		if((previous !== null) || (next !== null)) {
-			return  <div className="wrapper">
-						<Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
-					</div>
-		}
+        if (previous == null && next == null) return null;
+
+        return (
+            <div className="wrapper">
+                <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+            </div>
+        )
 	}
 
 	render() {

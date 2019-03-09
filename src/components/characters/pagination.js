@@ -4,7 +4,8 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 class Pagination extends Component {
 	btnHandler = (url) => {
 		this.props.getCharacters(url);
-	}
+    }
+    
 	render() {
 		return (
 			<div className="pagination">
