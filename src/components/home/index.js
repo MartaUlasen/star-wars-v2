@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FilmsSwiper from 'components/films-swiper';
 import CharactersSwiper from 'components/characters-swiper';
-import Bb8 from 'components/bb8';
-import R2d2 from 'components/r2d2';
+import r2d2 from 'img/r2d2.svg';
+import bb8 from 'img/bb8.svg';
 import './home.scss';
 
 class Home extends Component {
@@ -12,10 +12,10 @@ class Home extends Component {
 			<div className="home wrapper">
 				<div>
 					<Link to="characters/3">
-						<R2d2/>
+						<img className="icon-r2d2" src={r2d2} alt="" />
 					</Link>
 					<Link to="characters/87">
-						<Bb8 />
+                        <img className="icon-bb8" src={bb8} alt="" />
 					</Link>
 				</div>
 				<FilmsSwiper />
