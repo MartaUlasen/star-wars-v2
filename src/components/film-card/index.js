@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const getHrefId = (href) => {
 	return href.split('/').filter(function(v){return v;}).pop();
 }
-class FilmCard extends Component {
 
+class FilmCard extends Component {
 	render() {
 		const path = "/films/" + getHrefId(this.props.data.url);
 		return (

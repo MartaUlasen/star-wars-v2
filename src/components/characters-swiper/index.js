@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CharacterCard from '.././character-card';
-import Swiper from '.././swiper';
 import { Loader } from 'react-feather';
+import CharacterCard from 'components/character-card';
+import Swiper from 'components/swiper';
 import './characters-swiper.scss';
 
 class CharactersSwiper extends Component {

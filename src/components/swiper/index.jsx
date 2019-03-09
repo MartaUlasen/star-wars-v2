@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import IdSwiper from 'react-id-swiper';
 import { ChevronLeft, ChevronRight } from 'react-feather';
+import ReactSwiper from 'react-id-swiper';
 import 'swiper/dist/css/swiper.min.css';
 import './swiper.scss';
 
@@ -37,7 +37,7 @@ class Swiper extends Component {
 					onClick={this.goPrev}>
 					<ChevronLeft size={34}/>
 				</button>
-				<IdSwiper {...SLIDER_PARAMS} ref={node => {if(node) this.swiper = node.swiper }}>{this.props.children}</IdSwiper>
+				<ReactSwiper {...SLIDER_PARAMS} ref={node => {if(node) this.swiper = node.swiper }}>{this.props.children}</ReactSwiper>
 				<button 
 					className="swiper__button next"
 					type="button" 

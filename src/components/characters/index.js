@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CharacterCard from '.././character-card';
-import Pagination from './pagination';
 import { Loader } from 'react-feather';
+import CharacterCard from 'components/character-card';
+import Pagination from './pagination';
 
 class Characters extends Component {
 	state = {

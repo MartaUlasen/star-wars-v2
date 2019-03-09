@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import Header from '.././header';
+import Header from 'components/header';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from '.././home';
-import Films from '.././films';
-import Film from '.././film';
-import Characters from '.././characters';
-import Character from '.././character';
+import Home from 'components/home';
+import Films from 'components/films';
+import Film from 'components/film';
+import Characters from 'components/characters';
+import Character from 'components/character';
 
 import './app.scss';
-import './blocks/card.scss';
-import './blocks/buttons.scss';
-import './blocks/base.scss';
+import 'styles/card.scss';
+import 'styles/buttons.scss';
+import 'styles/base.scss';
 
 class App extends Component {
 	render() {

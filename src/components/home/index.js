@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import FilmsSwiper from '.././films-swiper';
-import CharactersSwiper from '.././characters-swiper';
-import Bb8 from '../../icons/bb8';
-import R2d2 from '../../icons/r2d2';
 import { Link } from 'react-router-dom';
+import FilmsSwiper from 'components/films-swiper';
+import CharactersSwiper from 'components/characters-swiper';
+import Bb8 from 'components/bb8';
+import R2d2 from 'components/r2d2';
 import './home.scss';
 
 class Home extends Component {

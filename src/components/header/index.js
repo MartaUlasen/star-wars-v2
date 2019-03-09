@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Navigation from './navigation';
-import './header.css';
 import { Link } from 'react-router-dom';
-import Logo from '../../icons/logo';
+import Logo from 'components/logo'
+import Navigation from './navigation';
+import './header.css';;
 
 class Header extends Component {
 	render() {

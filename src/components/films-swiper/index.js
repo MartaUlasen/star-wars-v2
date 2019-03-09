@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FilmCard from '.././film-card';
-import Swiper from '.././swiper';
 import { Loader } from 'react-feather';
+import FilmCard from 'components/film-card';
+import Swiper from 'components/swiper';
 import './films-swiper.scss';
 
 const compareNumberOfEpisode = (film1, film2) => {
