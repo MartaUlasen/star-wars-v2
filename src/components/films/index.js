@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
+import { fetchFilms } from 'actions';
 import FilmCard from 'components/film-card';
 import Sorter from './sorter';
 
@@ -16,70 +18,69 @@ const compareNumberOfEpisode = (film1, film2) => {
 
 class Films extends Component {
 	state = {
-		films: [],
-		isLoading: false,
-		error: null,
+		sortBy: 'Number of episode',
 	}
 
 	componentDidMount = () => {
-		this.getFilms();
+        const { fetchFilms } = this.props;
+        fetchFilms();
 	}
 
-	sort = (value) => {
-		const films = this.state.films;
-		if (value === 'Number of episode') {
-			films.sort(compareNumberOfEpisode);
+    sorterHandler = (sortBy) => {
+        this.setState({ sortBy });
+    }
+
+    sort(data, sortBy) {
+        if (sortBy === 'Number of episode') {
+			return data.sort(compareNumberOfEpisode);
 		} else {
-			films.sort(compareReleaseDate);
+			return data.sort(compareReleaseDate);
 		}
-		this.setState({ films });
-	}
-
-	getFilms = () => {
-		this.setState({ isLoading: true  });
-
-		fetch('https://swapi.co/api/films/')
-			.then(response => {
-				return response.json();
-			})
-			.then(data => {
-				const films = data.results.sort(compareNumberOfEpisode);
-				this.setState({ isLoading: false, films });
-			})
-			.catch(error => {
-				this.setState({ isLoading: false, error });
-			})
-	}
+    }
 	
-	renderError = () => {
-		if (this.state.error) {
+	renderError() {
+        const { error } = this.props;
+
+		if (error) {
 			return <p>Failed to load film data</p>
 		}
-	}
+    }
 
 	render() {
-		const { films, isLoading } = this.state;
+		const { data, isLoading } = this.props;
+		const { sortBy } = this.state;
+        const sortedData = this.sort(data, sortBy);
 
 		return (
 			<div className="wrapper">
 				<div className="title">Films</div>
-				<Sorter sort={this.sort}/>
+				<Sorter sort={this.sorterHandler}/>
 				<hr className="separator" noshade="true"/>
 					{this.renderError()}
 					{
 						isLoading
-						? <Loader className="icon-loading" size={30} />
-						: <ul className="grid">
-							{films.map((film) => {
-								return <li className="grid__item" key={film.episode_id}>
-											<FilmCard  data={film}/>
-										</li>
-							})}
-						</ul>
+                            ? <Loader className="icon-loading" size={30} />
+                            : <ul className="grid">
+                                {sortedData.map((film) => {
+                                    return (
+                                        <li className="grid__item" key={film.episode_id}>
+                                            <FilmCard  data={film}/>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
 					}				
 			</div>
 		)
 	}
 }
 
-export default Films;
+const mapStateToProps = (state) => ({
+    ...state.films,
+});
+
+const mapDispatchToProps = {
+    fetchFilms,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Films);
