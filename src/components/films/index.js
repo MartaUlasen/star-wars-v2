@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
-import { fetchFilms } from 'actions';
+import { fetchFilms } from 'actions/films';
 import FilmCard from 'components/film-card';
 import Sorter from './sorter';
 
@@ -47,7 +47,7 @@ class Films extends Component {
     }
 
 	render() {
-		const { data, isLoading } = this.props;
+        const { data, isLoading } = this.props;
 		const { sortBy } = this.state;
         const sortedData = this.sort(data, sortBy);
 

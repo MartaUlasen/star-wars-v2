@@ -1,77 +1,78 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
-import qs from 'query-string';
+import { fetchCharacters } from 'actions/characters';
 import CharacterCard from 'components/character-card';
 import Pagination from './pagination';
 
+
 class Characters extends Component {
-	state = {
-		people: [],
-		isLoading: false,
-		error: null,
-		previous: null,
-		next: null,
+    state = {
+        currentPage: 1,
+    }
+
+	componentDidMount = () => {
+        const { fetchCharacters } = this.props;
+        fetchCharacters(this.state.currentPage);
 	}
 
-	componentDidMount() {
-        const { location: { search } } = this.props;
-        const pageNum = qs.parse(search).page || '';
-		this.getCharacters(`https://swapi.co/api/people/?page=${pageNum}`);
-	}
+    setCurrentPage = (pageNum) => {
+        console.log(this.state.currentPage, pageNum)
+        this.setState({ currentPage: pageNum });
+        
+    }
 
-	getCharacters = (url) => {
+    setCurrentPageInHistory = (pageNum) => {
         const { history, location: { pathname } } = this.props;
-        const pageNum = qs.parseUrl(url).query.page;
-
+        console.log(history)
         history.push({
             pathname,
             search: `?page=${pageNum}`
         });
+    }
 
-        this.setState({ isLoading: true });
-        
-		fetch(url)
-			.then(response => {
-				return response.json();
-			})
-			.then(data => {
-				this.setState({ isLoading: false, people: data.results, previous: data.previous, next: data.next });
-			})
-			.catch(error => {
-				this.setState({ isLoading: false, error });
-			})
-	}
+    onPagination =(pageNum) => {
+        this.setCurrentPage(pageNum);
+        this.setCurrentPageInHistory(pageNum);
+        this.props.fetchCharacters(pageNum);
+    }
 	
 	renderError() {
-		if (this.state.error) {
-			return <p>Failed to load characters data</p>
+		const { error } = this.props;
+
+		if (error) {
+			return <p>Failed to load film data</p>
 		}
 	}
 
-	renderPagination = (previous, next) => {
-        if (previous == null && next == null) return null;
+	renderPagination = () => {
+        const { count } = this.props;
 
         return (
             <div className="wrapper">
-                <Pagination previous={previous} next={next} getCharacters={this.getCharacters}/>
+                <Pagination 
+                    currentPage={this.state.currentPage} 
+                    pageCount={count} 
+                    onPagination={this.onPagination}
+                />
             </div>
         )
 	}
 
 	render() {
-		const { people, isLoading, previous, next } = this.state;
-		
+        const { isLoading, data } = this.props;
+        console.log('render')
 		return (
 			<div className="wrapper">
 				<div className="title">Characters</div>
 				{this.renderError()}
-				{this.renderPagination(previous, next)}
+				{this.renderPagination()}
 				<hr className="separator" noshade="true"/>
 				{
 					isLoading
 					? <Loader className="icon-loading" size={30} />
 					:	<ul className="grid">
-							{people.map((character, index) => {
+							{data.map((character, index) => {
 								return  <li className="grid__item" key={index}>
 											<CharacterCard data={character}/>
 										</li>
@@ -83,4 +84,11 @@ class Characters extends Component {
 	}
 }
 
-export default Characters;
+const mapStateToProps = (state) => ({
+    ...state.characters,
+});
+
+const mapDispatchToProps = {
+    fetchCharacters,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Characters);
