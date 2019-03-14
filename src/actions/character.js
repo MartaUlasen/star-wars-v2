@@ -31,7 +31,7 @@ export function fetchCharacter(id) {
     
     return dispatch => {
         dispatch(requestCharacter());
-        return axios.get(`people/${id}/`)
+        return axios.get(`people/${id}`)
             .then(response => dispatch(
                 requestCharacterSuccess(response.data)
             ))
