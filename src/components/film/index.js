@@ -35,28 +35,24 @@ class Film extends Component {
 					<span className="film__episode">{data.episode_id}</span>:
 					<span className="film__name uppercase">{data.title}</span>
 				</h4>
-				<div className="grid">
-					<div className="grig__item">
-						<div>Director:</div>
-						<div>{data.director}</div>
-						<div>Produser:</div>
-						<div>{data.producer}</div>
-						<div>Date of reliase:</div>
-						<div>{data.release_date}</div>
-					</div>
-					<div className="grig__item">
-						<div>Characters:</div>
-						<ul className="film__characters">
-                            {this.renderCharacterError()}
-                            {isLoadingCharacters
-                                ? <Loader className="icon-loading" font={20} />
-                                : characters.map((character, index) => {
-                                    return <li key={index}>{character.data.name}</li>
-                                })
-                            }
-						</ul>
-					</div>
-				</div>
+                <div className="grid-film">
+                    <div className="grid-film__item">Director:</div>
+                    <div className="grid-film__item">{data.director}</div>
+                    <div className="grid-film__item">Produser:</div>
+                    <div className="grid-film__item">{data.producer}</div>
+                    <div className="grid-film__item">Date of reliase:</div>
+                    <div className="grid-film__item">{data.release_date}</div>
+                    <div className="grid-film__item">Characters:</div>
+                    <ul className="grid-film__item film__characters">
+                        {this.renderCharacterError()}
+                        {isLoadingCharacters
+                            ? <Loader className="icon-loading" font={20} />
+                            : characters.map((character, index) => {
+                                return <li key={index}>{character.data.name}</li>
+                            })
+                        }
+                    </ul>
+                </div>
 				<div className="stage">
 					<div className="stage__perspective">
 						<div className="stage__crawl-text">{data.opening_crawl}</div>

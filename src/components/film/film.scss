@@ -93,3 +93,15 @@ table {
 		opacity: 0;
 	}
 }
+
+
+.grid-film {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    background-color: #32383e;
+    margin-bottom: 16px;
+    padding: 8px 8px 0;
+    &__item {
+        padding-bottom: 8px
+    }
+}
