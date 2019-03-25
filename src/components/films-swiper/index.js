@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
+import { fetchFilms } from 'actions/films';
 import FilmCard from 'components/film-card';
 import Swiper from 'components/swiper';
 import './films-swiper.scss';
@@ -9,41 +11,26 @@ const compareNumberOfEpisode = (film1, film2) => {
 }
 
 class FilmsSwiper extends Component {
-	state = {
-		films: [],
-		isLoading: false,
-		error: null,
-	}
-
 	componentDidMount = () => {
-		this.getFilms();
-	}
+        const { fetchFilms } = this.props;
+        fetchFilms();
+    }
 
-	getFilms = (value) => {
-		this.setState({ isLoading: true  });
-
-		fetch('https://swapi.co/api/films/')
-			.then(response => {
-				return response.json();
-			})
-			.then(data => {
-				data.results.sort(compareNumberOfEpisode);
-				this.setState({ isLoading: false, films: data.results });
-			})
-			.catch(error => {
-				this.setState({ isLoading: false, error });
-			})
-	}
+    sort(data) {  
+        return data.sort(compareNumberOfEpisode);
+    }
 
 	renderError = () => {
-		if (this.state.error) {
+        const { error } = this.props;
+		if (error) {
 			return <p>Failed to load film data</p>
 		}
 	}
 
 	render() {
-		const { films, isLoading } = this.state;
-		const children = films.map(film => {
+        const { data, isLoading } = this.props;
+        const sortedData = this.sort(data);
+		const children = sortedData.map(film => {
 			return (<div key={film.episode_id}>
 				<FilmCard data={film}/>
 			</div>)
@@ -65,4 +52,13 @@ class FilmsSwiper extends Component {
 	}
 }
 
-export default FilmsSwiper;
+
+const mapStateToProps = (state) => ({
+    ...state.films,
+});
+
+const mapDispatchToProps = {
+    fetchFilms,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmsSwiper);

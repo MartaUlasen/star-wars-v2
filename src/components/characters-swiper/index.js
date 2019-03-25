@@ -1,44 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
+import { fetchCharacters } from 'actions/characters';
 import CharacterCard from 'components/character-card';
 import Swiper from 'components/swiper';
 import './characters-swiper.scss';
 
 class CharactersSwiper extends Component {
-	state = {
-		people: [],
-		isLoading: false,
-		error: null,
-	}
-
 	componentDidMount() {
-		this.getCharacters('https://swapi.co/api/people/');
-	}
-
-	getCharacters = (url) => {
-		this.setState({ isLoading: true  });
-
-		fetch(url)
-			.then(response => {
-				return response.json();
-			})
-			.then(data => {
-				this.setState({ isLoading: false, people: data.results, previous: data.previous, next: data.next });
-			})
-			.catch(error => {
-				this.setState({ isLoading: false, error });
-			})
+		const { fetchCharacters } = this.props;
+        fetchCharacters(1);
 	}
 	
 	renderError() {
-		if (this.state.error) {
+        const { error } = this.props;
+		if (error) {
 			return <p>Failed to load characters data</p>
 		}
 	}
 
 	render() {
-		const { people, isLoading } = this.state;
-		const children = people.map((character, index) => {
+		const { data, isLoading } = this.props;
+		const children = data.map((character, index) => {
 			return (<div key={index}>
 				<CharacterCard data={character}/>
 			</div>)
@@ -58,5 +41,12 @@ class CharactersSwiper extends Component {
         )
 	}
 }
+const mapStateToProps = (state) => ({
+    ...state.characters,
+});
 
-export default CharactersSwiper;
+const mapDispatchToProps = {
+    fetchCharacters,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersSwiper);
