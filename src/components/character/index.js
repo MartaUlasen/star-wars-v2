@@ -23,26 +23,17 @@ class Character extends Component {
 	rederCharacter() {
 		const { data } = this.props;
 		return (
-			<div className="character wrapper">
-				<table className="table table-striped table-hover table-bordered">
-					<tbody>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">
-								<User className="icon-user" size={80} />
-							</td>
-							<td className="js-director col-8 col-md-9 col-lg-10" >{data.name}</td>
-						</tr>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Gender:</td>
-							<td className="js-director col-8 col-md-9 col-lg-10" >{data.gender}</td>
-						</tr>
-						<tr className="row">
-							<td className="col-4 col-md-3 col-lg-2">Birthday:</td>
-							<td className="col-8 col-md-9 col-lg-10">{data.birth_year}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+            <div className="grid-20-80 wrapper">
+                <div className="grid-20-80__item grid-20-80__item-title">
+                    <User className="icon-user" size={80} />
+                </div>
+                <div className="grid-20-80__item">Name:</div>
+                <div className="grid-20-80__item">{data.name}</div>
+                <div className="grid-20-80__item">Gender:</div>
+                <div className="grid-20-80__item">{data.gender}</div>
+                <div className="grid-20-80__item">Birthday:</div>
+                <div className="grid-20-80__item">{data.birth_year}</div>
+            </div>
 		)
 	}
 
