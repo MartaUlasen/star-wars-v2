@@ -4,7 +4,6 @@ import { Loader } from 'react-feather';
 import { fetchFilmsIfNeeded } from 'actions/films';
 import FilmCard from 'components/film-card';
 import Swiper from 'components/swiper';
-import './films-swiper.scss';
 
 const compareNumberOfEpisode = (film1, film2) => {
 	return film1.episode_id - film2.episode_id;
@@ -23,7 +22,7 @@ class FilmsSwiper extends Component {
 	renderError = () => {
         const { error } = this.props;
 		if (error) {
-			return <p>Failed to load film data</p>
+			return <div><p>Failed to load film data</p></div>
 		}
 	}
 
@@ -34,12 +33,13 @@ class FilmsSwiper extends Component {
 			return (<div key={film.episode_id}>
 				<FilmCard data={film}/>
 			</div>)
-		});
+        });
+        
 		return (
 			<div className="films-swiper">
 				<div className="title">Films</div>
-				<div className="swiper">
-					{this.renderError()}
+				{this.renderError()}
+				<div>
 					{
 						isLoading
 							? <Loader className="icon-loading" size={30} />
@@ -47,7 +47,6 @@ class FilmsSwiper extends Component {
 					}
 				</div>
 			</div>
-			
         )
 	}
 }

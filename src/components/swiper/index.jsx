@@ -9,43 +9,40 @@ const SLIDER_PARAMS = {
 	spaceBetween: 30,
 	slidesPerGroup: 1,
 	loop: true,
-	//loopFillGroupWithBlank: true,
 };
 
 class Swiper extends Component {
-	constructor(props) {
-		super(props)
-		this.goNext = this.goNext.bind(this)
-		this.goPrev = this.goPrev.bind(this)
-		this.swiper = null
+	swiperRef = React.createRef()
+	
+	goNext = () => {
+        if (this.swiperRef.current) {
+            this.swiperRef.current.swiper.slideNext();
+        }
 	}
 	
-	goNext() {
-		if (this.swiper) this.swiper.slideNext()
-	}
-	
-	goPrev() {
-		if (this.swiper) this.swiper.slidePrev()
-	}
+	goPrev = () => {
+		if (this.swiperRef.current) {
+            this.swiperRef.current.swiper.slidePrev();
+        }
+    }
 	
 	render() {
 		return (
-			<React.Fragment>
+			<div className="swiper">
 				<button 
 					className="swiper__button prev" 
 					type="button"
 					onClick={this.goPrev}>
 					<ChevronLeft size={34}/>
 				</button>
-				<ReactSwiper {...SLIDER_PARAMS} ref={node => {if(node) this.swiper = node.swiper }}>{this.props.children}</ReactSwiper>
+				<ReactSwiper {...SLIDER_PARAMS} ref={this.swiperRef}>{this.props.children}</ReactSwiper>
 				<button 
 					className="swiper__button next"
 					type="button" 
 					onClick={this.goNext}>
 					<ChevronRight size={34}/>
 				</button>
-				
-			</React.Fragment>
+			</div>
 		)
 	}
 }

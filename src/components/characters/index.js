@@ -1,40 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
-import { fetchCharacters } from 'actions/characters';
+import queryString from 'query-string';
+import { setCharactersPage, fetchCharactersIfNeeded } from 'actions/characters';
 import CharacterCard from 'components/character-card';
 import Pagination from './pagination';
 
 
 class Characters extends Component {
-    state = {
-        currentPage: 1,
-    }
-
 	componentDidMount = () => {
-        const { fetchCharacters } = this.props;
-        fetchCharacters(this.state.currentPage);
+        const { currentPage, setCharactersPage, fetchCharactersIfNeeded, location: { search } } = this.props;
+        const pageFromQuery = queryString.parse(search).page;
+        const pageNum = pageFromQuery != null ? parseInt(pageFromQuery, 10) : currentPage;
+        setCharactersPage(pageNum);
+        fetchCharactersIfNeeded(pageNum);
 	}
-
-    setCurrentPage = (pageNum) => {
-        console.log(this.state.currentPage, pageNum)
-        this.setState({ currentPage: pageNum });
-        
-    }
 
     setCurrentPageInHistory = (pageNum) => {
         const { history, location: { pathname } } = this.props;
-        console.log(history)
         history.push({
             pathname,
             search: `?page=${pageNum}`
         });
     }
 
-    onPagination =(pageNum) => {
-        this.setCurrentPage(pageNum);
+    onPagination = (pageNum) => {
+        const { setCharactersPage, fetchCharactersIfNeeded } = this.props;
         this.setCurrentPageInHistory(pageNum);
-        this.props.fetchCharacters(pageNum);
+        setCharactersPage(pageNum);
+        fetchCharactersIfNeeded(pageNum);
     }
 	
 	renderError() {
@@ -46,12 +40,12 @@ class Characters extends Component {
 	}
 
 	renderPagination = () => {
-        const { count } = this.props;
+        const { currentPage, count } = this.props;
 
         return (
             <div className="wrapper">
                 <Pagination 
-                    currentPage={this.state.currentPage} 
+                    currentPage={currentPage} 
                     pageCount={count} 
                     onPagination={this.onPagination}
                 />
@@ -61,7 +55,7 @@ class Characters extends Component {
 
 	render() {
         const { isLoading, data } = this.props;
-        console.log('render')
+
 		return (
 			<div className="wrapper">
 				<div className="title">Characters</div>
@@ -71,24 +65,33 @@ class Characters extends Component {
 				{
 					isLoading
 					? <Loader className="icon-loading" size={30} />
-					:	<ul className="grid">
-							{data.map((character, index) => {
-								return  <li className="grid__item" key={index}>
-											<CharacterCard data={character}/>
-										</li>
-							})}
-						</ul>		
+					: (
+                        <ul className="grid">
+                            {data.map((character, index) => {
+                                return (
+                                    <li className="grid__item" key={index}>
+                                        <CharacterCard data={character}/>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    )		
 				}
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state) => ({
-    ...state.characters,
+const mapStateToProps = ({ characters }) => ({
+    currentPage: characters.currentPage,
+    isLoading: characters.isLoading,
+    data: characters.dataByPage[characters.currentPage] || [],
+    count: characters.count,
+    error: characters.error,
 });
 
 const mapDispatchToProps = {
-    fetchCharacters,
+    setCharactersPage,
+    fetchCharactersIfNeeded,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Characters);
