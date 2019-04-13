@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
 import { fetchFilm } from 'actions/film';
 import './film.scss';
+
+const getHrefId = (href) => {
+	return href.split('/').filter(function(v){return v;}).pop();
+}
 
 class Film extends Component {
 	state = {
@@ -35,20 +40,25 @@ class Film extends Component {
 					<span className="film__episode">{data.episode_id}</span>:
 					<span className="film__name uppercase">{data.title}</span>
 				</h4>
-                <div className="grid-film">
-                    <div className="grid-film__item">Director:</div>
-                    <div className="grid-film__item">{data.director}</div>
-                    <div className="grid-film__item">Produser:</div>
-                    <div className="grid-film__item">{data.producer}</div>
-                    <div className="grid-film__item">Date of reliase:</div>
-                    <div className="grid-film__item">{data.release_date}</div>
-                    <div className="grid-film__item">Characters:</div>
-                    <ul className="grid-film__item film__characters">
+                <div className="grid-20-80">
+                    <div className="grid-20-80__item">Director:</div>
+                    <div className="grid-20-80__item">{data.director}</div>
+                    <div className="grid-20-80__item">Produser:</div>
+                    <div className="grid-20-80__item">{data.producer}</div>
+                    <div className="grid-20-80__item">Date of reliase:</div>
+                    <div className="grid-20-80__item">{data.release_date}</div>
+                    <div className="grid-20-80__item">Characters:</div>
+                    <ul className="grid-20-80__item film__characters">
                         {this.renderCharacterError()}
                         {isLoadingCharacters
                             ? <Loader className="icon-loading" font={20} />
                             : characters.map((character, index) => {
-                                return <li key={index}>{character.data.name}</li>
+                                const path = "/characters/" + getHrefId(character.data.url);
+                                return (
+                                    <li key={index}>
+                                        <Link to={path} className="link link--character">{character.data.name}</Link>
+                                    </li>
+                                )
                             })
                         }
                     </ul>

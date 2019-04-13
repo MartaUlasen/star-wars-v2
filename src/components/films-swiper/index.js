@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
-import { fetchFilms } from 'actions/films';
+import { fetchFilmsIfNeeded } from 'actions/films';
 import FilmCard from 'components/film-card';
 import Swiper from 'components/swiper';
 import './films-swiper.scss';
@@ -12,8 +12,8 @@ const compareNumberOfEpisode = (film1, film2) => {
 
 class FilmsSwiper extends Component {
 	componentDidMount = () => {
-        const { fetchFilms } = this.props;
-        fetchFilms();
+        const { fetchFilmsIfNeeded } = this.props;
+        fetchFilmsIfNeeded();
     }
 
     sort(data) {  
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    fetchFilms,
+    fetchFilmsIfNeeded,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmsSwiper);
