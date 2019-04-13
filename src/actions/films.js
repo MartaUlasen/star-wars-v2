@@ -27,11 +27,24 @@ function requestFilmsError(error) {
     }
 }
 
-export function fetchFilms() {
+function fetchFilms() {
     return dispatch => {
         dispatch(requestFilms());
         return axios.get('films/')
             .then(response => dispatch(requestFilmsSuccess(response.data)))
             .catch(error => dispatch(requestFilmsError(error)))
+    }
+}
+
+function shouldFetchFilms(state) {
+    const length = state.films.data.length;
+    return !length;
+}
+
+export function fetchFilmsIfNeeded() {
+    return (dispatch, getState) => {
+        if (shouldFetchFilms(getState())) {
+            return dispatch(fetchFilms())
+        }
     }
 }

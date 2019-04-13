@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
-import { fetchFilms } from 'actions/films';
+import { fetchFilmsIfNeeded } from 'actions/films';
 import FilmCard from 'components/film-card';
 import Sorter from './sorter';
 
@@ -22,8 +22,8 @@ class Films extends Component {
 	}
 
 	componentDidMount = () => {
-        const { fetchFilms } = this.props;
-        fetchFilms();
+        const { fetchFilmsIfNeeded } = this.props;
+        fetchFilmsIfNeeded();
 	}
 
     sorterHandler = (sortBy) => {
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    fetchFilms,
+    fetchFilmsIfNeeded,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Films);
