@@ -10,11 +10,11 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="home wrapper">
-				<div>
-					<Link to="characters/3">
+				<div className="characters-pictures">
+					<Link className="characters-pictures__item" to="characters/3">
 						<img className="icon-r2d2" src={r2d2} alt="" />
 					</Link>
-					<Link to="characters/87">
+					<Link className="characters-pictures__item" to="characters/87">
                         <img className="icon-bb8" src={bb8} alt="" />
 					</Link>
 				</div>

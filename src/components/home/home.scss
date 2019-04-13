@@ -9,3 +9,11 @@
 	transform: rotateY(180deg);
 	padding-bottom: 8px;
 }
+
+.characters-pictures {
+    display: flex;
+    justify-content: center;
+    &__item {
+        display: inline-block;
+    }
+}
