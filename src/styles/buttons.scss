@@ -43,19 +43,32 @@
     color: #ffe81f;
     text-transform: uppercase;
 	background-color: transparent;
-	border: none;
-	transition: color 0.2s ease-in;
+	border-bottom: 1px solid transparent;
+    transition: 
+        color 0.2s ease-in,
+        border-bottom 0.2s ease-in;;
+    
 	&:not([disabled]):hover {
 		color: rgba(255, 232, 31, 0.7);
-		cursor: pointer;
+        cursor: pointer;
+        border-bottom: 1px solid #ffe81f;
 	}
 	&[disabled] {
 		color: rgba(255, 232, 31, 0.4);
-	}
+    }
+    &--character {
+        padding: 0;
+        line-height: 1.6em;
+        text-transform: none;
+        border-bottom: none;
+        &:not([disabled]):hover {
+            border-bottom: none;
+        }
+    }
 }
 
 .link--active {
-	color: white;
+	border-bottom: 1px solid#ffe81f;
 }
 
 .sorter {

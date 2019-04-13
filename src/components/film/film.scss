@@ -95,13 +95,17 @@ table {
 }
 
 
-.grid-film {
+.grid-20-80 {
     display: grid;
-    grid-template-columns: 20% 80%;
-    background-color: #32383e;
-    margin-bottom: 16px;
-    padding: 8px 8px 0;
+    grid-template-columns: 20% calc(80% - 0.5em);
+    grid-gap: 0.5em;
+    margin-bottom: 1.5em;
     &__item {
-        padding-bottom: 8px
+        padding: 1em 0.5em;
+        background-color: #32383e;
+    }
+    &__item-title {
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 }
