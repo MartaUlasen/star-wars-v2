@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
 import queryString from 'query-string';
 import { setCharactersPage, fetchCharactersIfNeeded } from 'actions/characters';
+import { selectCharactersPageData } from 'selectors';
 import CharacterCard from 'components/character-card';
 import Pagination from './pagination';
 
@@ -12,12 +13,14 @@ class Characters extends Component {
         const { currentPage, setCharactersPage, fetchCharactersIfNeeded, location: { search } } = this.props;
         const pageFromQuery = queryString.parse(search).page;
         const pageNum = pageFromQuery != null ? parseInt(pageFromQuery, 10) : currentPage;
+        
         setCharactersPage(pageNum);
         fetchCharactersIfNeeded(pageNum);
 	}
 
     setCurrentPageInHistory = (pageNum) => {
         const { history, location: { pathname } } = this.props;
+        
         history.push({
             pathname,
             search: `?page=${pageNum}`
@@ -26,6 +29,7 @@ class Characters extends Component {
 
     onPagination = (pageNum) => {
         const { setCharactersPage, fetchCharactersIfNeeded } = this.props;
+        
         this.setCurrentPageInHistory(pageNum);
         setCharactersPage(pageNum);
         fetchCharactersIfNeeded(pageNum);
@@ -54,7 +58,7 @@ class Characters extends Component {
 	}
 
 	render() {
-        const { isLoading, data } = this.props;
+        const { data, isLoading } = this.props;
 
 		return (
 			<div className="wrapper">
@@ -64,18 +68,18 @@ class Characters extends Component {
 				<hr className="separator" noshade="true"/>
 				{
 					isLoading
-					? <Loader className="icon-loading" size={30} />
-					: (
-                        <ul className="grid">
-                            {data.map((character, index) => {
-                                return (
-                                    <li className="grid__item" key={index}>
-                                        <CharacterCard data={character}/>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    )		
+                        ? <Loader className="icon-loading" size={30} />
+                        : (
+                            <ul className="grid">
+                                {data.map((character, index) => {
+                                    return (
+                                        <li className="grid__item" key={index}>
+                                            <CharacterCard data={character}/>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        )		
 				}
 			</div>
 		)
@@ -83,11 +87,9 @@ class Characters extends Component {
 }
 
 const mapStateToProps = ({ characters }) => ({
-    currentPage: characters.currentPage,
-    isLoading: characters.isLoading,
-    data: characters.dataByPage[characters.currentPage] || [],
     count: characters.count,
-    error: characters.error,
+    currentPage: characters.currentPage,
+    ...selectCharactersPageData(characters, characters.currentPage),
 });
 
 const mapDispatchToProps = {

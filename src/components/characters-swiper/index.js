@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'react-feather';
 import { setCharactersPage, fetchCharactersIfNeeded } from 'actions/characters';
+import { selectCharactersPageData } from 'selectors';
 import CharacterCard from 'components/character-card';
 import Swiper from 'components/swiper';
 
@@ -10,7 +11,7 @@ const CHARACTERS_PAGE_NUM = 1;
 class CharactersSwiper extends Component {
 	componentDidMount() {
         const { setCharactersPage, fetchCharactersIfNeeded } = this.props;
-        setCharactersPage(CHARACTERS_PAGE_NUM)
+        setCharactersPage(CHARACTERS_PAGE_NUM);
         fetchCharactersIfNeeded(CHARACTERS_PAGE_NUM);
 	}
 	
@@ -22,8 +23,9 @@ class CharactersSwiper extends Component {
 	}
 
 	render() {
-		const { data, isLoading } = this.props;
+        const { data, isLoading } = this.props;
 		const children = data.map((character, index) => {
+            
 			return (
                 <div key={index}>
                     <CharacterCard data={character}/>
@@ -48,9 +50,7 @@ class CharactersSwiper extends Component {
 }
 
 const mapStateToProps = ({ characters }) => ({
-    isLoading: characters.isLoading,
-    data: characters.dataByPage[CHARACTERS_PAGE_NUM] || [],
-    error: characters.error,
+    ...selectCharactersPageData(characters, characters.currentPage),
 });
 
 const mapDispatchToProps = {

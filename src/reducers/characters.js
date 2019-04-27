@@ -7,40 +7,51 @@ import {
 
 function characters(state = {
     currentPage: 1,
-    isLoading: false,
     dataByPage: {},
     count: null,
-    error: null,
 }, { type, payload = {} }) {
     switch (type) {
         case SET_CHRACTERS_PAGE:
             return {
                 ...state,
                 currentPage: payload,
-                isLoading: false,
-                error: null,
             };
         case REQUEST_CHARACTERS:
             return {
                 ...state,
-                isLoading: true,
+                dataByPage: {
+                    ...state.dataByPage,
+                    [payload.pageNum]: {
+                        error: null,
+                        isLoading: true,
+                        data: [],
+                    },
+                },
             };
         case REQUEST_CHARACTERS_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                error: null,
                 dataByPage: {
                     ...state.dataByPage,
-                    [payload.pageNum]: payload.data,
+                    [payload.pageNum]: {
+                        error: null,
+                        isLoading: false,
+                        data: payload.data,
+                    },
                 },
                 count: payload.count,
             };
         case REQUEST_CHARACTERS_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: payload,
+                dataByPage: {
+                    ...state.dataByPage,
+                    [payload.pageNum]: {
+                        error: payload,
+                        isLoading: false,
+                        data: [],
+                    },
+                },
             };
         default:
             return state;
