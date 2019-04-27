@@ -72,14 +72,18 @@
 }
 
 .sorter {
-	padding-bottom: 0;
+    padding-bottom: 0;
+    border: none;
+    &:not([disabled]):hover {
+        cursor: pointer;
+        border-bottom: none;
+	}
 	.option {
-		padding: 0 12px;
+		padding: 4px 12px;
 		font-size: 1rem;
 		text-decoration: none;
 		color: #ffe81f;
 		background:#484e55;
 		border: 1px solid rgba(0, 0, 0, 0.6);
-		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 	}
 } 
