@@ -9,3 +9,15 @@ export const selectCharactersPageData = (state, pageNum) => {
         };
     }
 };
+
+export const selectCharacterDataById = (state, id) => {
+    if (state.dataById[id]) {
+        return {
+            ...state.dataById[id]
+        };
+    } else {
+        return {
+            data: []
+        };
+    }
+};

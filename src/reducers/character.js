@@ -5,29 +5,45 @@ import {
 } from 'actions/character';
 
 function character(state = {
-    isLoading: false,
-    data: [],
-    error: null,
-}, action) {
-    switch (action.type) {
+    dataById: {}, 
+}, { type, payload = {} }) {
+    switch (type) {
         case REQUEST_CHARACTER:
             return {
                 ...state,
-                isLoading: true
+                dataById: {
+                    ...state.dataById,
+                    [payload.characterId]: {
+                        error: null,
+                        isLoading: true,
+                        data: [],
+                    }
+                }
+                
             };
         case REQUEST_CHARACTER_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                error: null,
-                data: action.payload,
+                dataById: {
+                    ...state.dataById,
+                    [payload.characterId]: {
+                        error: null,
+                        isLoading: false,
+                        data: payload.data,
+                    }
+                }
             };
         case REQUEST_CHARACTER_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: action.payload,
-                data: [],
+                dataById: {
+                    ...state.dataById,
+                    [payload.characterId]: {
+                        error: payload,
+                        isLoading: false,
+                        data: [],
+                    }
+                }
             };
         default:
             return state;

@@ -3,38 +3,66 @@ const axios = fetcher.create({
     baseURL: 'https://swapi.co/api/',
 });
 
-export const REQUEST_CHARACTER = 'REQUEST_CHARACTERS';
+export const REQUEST_CHARACTER = 'REQUEST_CHARACTER';
 export const REQUEST_CHARACTER_SUCCESS = 'REQUEST_CHARACTER_SUCCESS';
 export const REQUEST_CHARACTER_ERROR = 'REQUEST_CHARACTER_ERROR';
 
-function requestCharacter() {
+function requestCharacter(characterId) {
     return {
         type: REQUEST_CHARACTER,
+        payload: {
+            characterId
+        },
     }
 }
 
-function requestCharacterSuccess(data) {
+function requestCharacterSuccess(characterId, data) {
     return {
         type: REQUEST_CHARACTER_SUCCESS,
-        payload: data,
+        payload: {
+            characterId,
+            data,
+        },
     }
 }
 
-function requestCharacterError(error) {
+function requestCharacterError(characterId, error) {
     return {
         type: REQUEST_CHARACTER_ERROR,
-        payload: error,
+        payload: {
+            characterId,
+            error,
+        }
     }
 }
 
-export function fetchCharacter(id) {
-    
+function fetchCharacter(characterId) {
     return dispatch => {
-        dispatch(requestCharacter());
-        return axios.get(`people/${id}`)
+        dispatch(requestCharacter(characterId));
+        return axios.get(`people/${characterId}`)
             .then(response => dispatch(
-                requestCharacterSuccess(response.data)
+                requestCharacterSuccess(characterId, response.data)
             ))
-            .catch(error => dispatch(requestCharacterError(error)))
+            .catch(error => dispatch(requestCharacterError(characterId, error)))
+    }
+}
+
+function shouldFetchCharacter(state, characterId) {
+    const character = state.character.dataById[characterId];
+    const length = character && character.data;
+    const isLoading = character && character.isLoading;
+
+    if (length || isLoading) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function fetchCharacterIfNeeded(characterId) {
+    return (dispatch, getState) => {
+        if (shouldFetchCharacter(getState(), characterId)) {
+            return dispatch(fetchCharacter(characterId))
+        }
     }
 }

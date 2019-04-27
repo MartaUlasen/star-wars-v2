@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCharacter} from 'actions/character';
+import { fetchCharacterIfNeeded } from 'actions/character';
+import { selectCharacterDataById } from 'selectors';
 import { Loader, User } from 'react-feather';
 
 class Character extends Component {
-	state = {
-		id: this.props.match.params.id,
-	}
-	
 	componentDidMount = () => {
-        const { fetchCharacter } = this.props;
-        const { id } = this.state;
-        fetchCharacter(id);
+        const { fetchCharacterIfNeeded } = this.props;
+        const { match: { params: { id } } } = this.props; 
+        fetchCharacterIfNeeded(id);
 	}
 	renderError() {
         const { error } = this.props;
 		if (error) {
-			return <p>Failed to load people data</p>
+			return <p>Failed to load character data</p>
 		}
 	}
 
-	rederCharacter() {
+	renderCharacter() {
 		const { data } = this.props;
 		return (
             <div className="grid-20-80 wrapper">
@@ -44,19 +41,20 @@ class Character extends Component {
 				{this.renderError()}
 				{isLoading
 					? <Loader className="icon-loading" size={20} />
-					: this.rederCharacter()
+					: this.renderCharacter()
 				}
 			</div>				
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    ...state.character,
+const mapStateToProps = ({ character }, { match: { params: { id } } }) => ({
+    id,
+    ...selectCharacterDataById(character, id),
 });
 
 const mapDispatchToProps = {
-    fetchCharacter,
+    fetchCharacterIfNeeded,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Character);
