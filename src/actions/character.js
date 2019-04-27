@@ -62,7 +62,7 @@ function shouldFetchCharacter(state, characterId) {
 export function fetchCharacterIfNeeded(characterId) {
     return (dispatch, getState) => {
         if (shouldFetchCharacter(getState(), characterId)) {
-            return dispatch(fetchCharacter(characterId))
+            return dispatch(fetchCharacter(characterId));
         }
     }
 }

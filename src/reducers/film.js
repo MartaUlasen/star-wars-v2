@@ -8,52 +8,82 @@ import {
 } from 'actions/film';
 
 function film(state = {
-    isLoading: false,
-    data: [],
-    error: null,
-    isLoadingCharacters: false,
-    characters: [],
-    charactersError: null,
-}, action) {
-    switch (action.type) {
+    dataById: {},
+}, { type, payload = {} }) {
+    switch (type) {
         case REQUEST_FILM:
             return {
                 ...state,
-                isLoading: true
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        error: null,
+                        isLoading: true,
+                        data: [],
+                        isLoadingCharacters: false,
+                        charactersError: null,
+                    }
+                }
             };
         case REQUEST_FILM_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                error: null,
-                data: action.payload,
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        ...state.dataById[payload.filmId],
+                        error: null,
+                        isLoading: false,
+                        data: payload.data,
+                    }
+                }
             }; 
         case REQUEST_FILM_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: action.payload,
-                data: [],
-                characters: [],
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        ...state.dataById[payload.filmId],
+                        error: payload,
+                        isLoading: false,
+                        data: [],
+                    }
+                }
             };
         case REQUEST_FILM_CHARACTERS:
             return {
                 ...state,
-                isLoadingCharacters: true
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        ...state.dataById[payload.filmId],
+                        isLoadingCharacters: true,
+                    }
+                }
             };
         case REQUEST_FILM_CHARACTERS_SUCCESS:
             return {
                 ...state,
-                isLoadingCharacters: false,
-                charactersError: null,
-                characters: action.payload,
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        ...state.dataById[payload.filmId],
+                        isLoadingCharacters: false,
+                    }
+                }
             };
         case REQUEST_FILM_CHARACTERS_ERROR:
             return {
                 ...state,
-                isLoadingCharacters: false,
-                charactersError: action.payload,
-                characters: [],
+                dataById: {
+                    ...state.dataById,
+                    [payload.filmId]: {
+                        ...state.dataById[payload.filmId],
+                        isLoadingCharacters: false,
+                        charactersError: payload.error,
+                    }
+                }
             };
         default:
             return state;

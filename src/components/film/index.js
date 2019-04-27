@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchFilmIfNeeded } from 'actions/film';
+import { selectFilmDataById } from 'selectors';
 import { Loader } from 'react-feather';
-import { fetchFilm } from 'actions/film';
+import CharacterLink from './characterLink';
 import './film.scss';
 
-const getHrefId = (href) => {
-	return href.split('/').filter(function(v){return v;}).pop();
-}
-
 class Film extends Component {
-	state = {
-		id: this.props.match.params.id,
-	}
     componentDidMount = () => {
-        const { fetchFilm } = this.props;
-        fetchFilm(this.state.id);
+        const { fetchFilmIfNeeded } = this.props;
+        const { match: { params: { id } } } = this.props; 
+        fetchFilmIfNeeded(id);
     }
 
 	renderError() {
@@ -31,8 +26,10 @@ class Film extends Component {
 		}
 	}
 
-	rederFilm() {
-		const { data, characters, isLoadingCharacters } = this.props;
+	renderFilm() {
+        const { data, isLoadingCharacters } = this.props;
+        const { characters } = this.props.data;
+
 		return (
 			<div className="film wrapper">
 				<h4 className="film__title">
@@ -50,13 +47,13 @@ class Film extends Component {
                     <div className="grid-20-80__item">Characters:</div>
                     <ul className="grid-20-80__item film__characters">
                         {this.renderCharacterError()}
-                        {isLoadingCharacters
+                        {
+                            isLoadingCharacters
                             ? <Loader className="icon-loading" font={20} />
-                            : characters.map((character, index) => {
-                                const path = "/characters/" + getHrefId(character.data.url);
+                            : characters && characters.map((character) => {
                                 return (
-                                    <li key={index}>
-                                        <Link to={path} className="link link--character">{character.data.name}</Link>
+                                    <li key={character}>
+                                        <CharacterLink id={character}/>
                                     </li>
                                 )
                             })
@@ -80,19 +77,20 @@ class Film extends Component {
 				{this.renderError()}
 				{isLoading
 					? <Loader className="icon-loading" font={20} />
-					: this.rederFilm()
+					: this.renderFilm()
 				}
 			</div>				
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    ...state.film,
+const mapStateToProps = ({ film }, { match: { params: { id } } }) => ({
+    id,
+    ...selectFilmDataById(film, id),
 });
 
 const mapDispatchToProps = {
-    fetchFilm,
+    fetchFilmIfNeeded,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Film);

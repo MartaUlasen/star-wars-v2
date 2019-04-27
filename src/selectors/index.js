@@ -21,3 +21,15 @@ export const selectCharacterDataById = (state, id) => {
         };
     }
 };
+
+export const selectFilmDataById = (state, id) => {
+    if (state.dataById[id]) {
+        return {
+            ...state.dataById[id]
+        };
+    } else {
+        return {
+            data: []
+        };
+    }
+};

@@ -67,7 +67,7 @@ function shouldFetchCharacters(state, pageNum) {
 export function fetchCharactersIfNeeded(pageNum) {
     return (dispatch, getState) => {
         if (shouldFetchCharacters(getState(), pageNum)) {
-            return dispatch(fetchCharacters(pageNum))
+            return dispatch(fetchCharacters(pageNum));
         }
     }
 }

@@ -19,7 +19,6 @@ function character(state = {
                         data: [],
                     }
                 }
-                
             };
         case REQUEST_CHARACTER_SUCCESS:
             return {

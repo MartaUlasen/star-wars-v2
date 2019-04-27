@@ -9,24 +9,3 @@ export default function configureStore() {
         composeWithDevTools(applyMiddleware(thunk)),
     )
 }
-
-/* {
-        films: {
-            data: [],
-            isLoading: false,
-            error: null,
-        },
-        characters: {
-            data: [],
-            isLoading: false,
-            error: null,
-            count: null,
-        },
-        film: {
-            id: null,
-            data: {},
-            isLoading: false,
-            error: null,
-            characters: [],
-        }
-} */

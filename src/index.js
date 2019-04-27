@@ -8,7 +8,7 @@ import './index.css';
 
 const store = configureStore();
 
-console.log(store.getState())
+window.store = store;
 
 ReactDOM.render(		
     <Provider store={store}>				

@@ -1,5 +1,5 @@
 import * as fetcher from 'axios';
-
+import { fetchCharacterIfNeeded } from 'actions/character';
 const axios = fetcher.create({
     baseURL: 'https://swapi.co/api/',
 });
@@ -11,72 +11,108 @@ export const REQUEST_FILM_CHARACTERS = 'REQUEST_FILM_CHARACTERS';
 export const REQUEST_FILM_CHARACTERS_SUCCESS = 'REQUEST_FILM_CHARACTERS_SUCCESS';
 export const REQUEST_FILM_CHARACTERS_ERROR = 'REQUEST_FILM_CHARACTERS_ERROR';
 
-function requestFilm() {
+const getHrefId = (href) => {
+	return href.split('/').filter(function(v){return v;}).pop();
+}
+
+function requestFilm(filmId) {
     return {
         type: REQUEST_FILM,
+        payload: {
+            filmId
+        },
     }
 }
 
-function requestFilmSuccess(data) {
+function requestFilmSuccess(filmId, data, characterIds) {
     return {
         type: REQUEST_FILM_SUCCESS,
-        payload: data,
+        payload: {
+            filmId,
+            data,
+        },
     }
 }
 
-function requestFilmError(error) {
+function requestFilmError(filmId, error) {
     return {
         type: REQUEST_FILM_ERROR,
-        payload: error,
+        payload: {
+            filmId,
+            error,
+        }
     }
 }
 
-function requestFilmCharacters() {
+function requestFilmCharacters(filmId) {
     return {
         type: REQUEST_FILM_CHARACTERS,
+        payload: { filmId },
     }
 }
 
-function requestFilmCharactersSuccess(characters) {
+function requestFilmCharactersSuccess(filmId) {
     return {
         type: REQUEST_FILM_CHARACTERS_SUCCESS,
-        payload: characters,
+        payload: { filmId },
     }
 }
 
-function requestFilmCharactersError(charactersError) {
+function requestFilmCharactersError(filmId, error) {
     return {
         type: REQUEST_FILM_CHARACTERS_ERROR,
-        payload: charactersError,
+        payload: { filmId, error },
     }
 }
 
-function fetchFilmCharacters(urls) {
-    return dispatch => {
-        dispatch(requestFilmCharacters());
+function fetchFilmCharacters(filmId, characterIds) {
+    return (dispatch, getState) => {
+        dispatch(requestFilmCharacters(filmId));
 
-        const characterPromises = urls.map(url =>
-            axios.get(url)
-        );
+        const characterRequests = characterIds.map(id => fetchCharacterIfNeeded(id)(dispatch, getState));
 
-        return Promise.all(characterPromises)
-            .then(characters => { 
-                dispatch(requestFilmCharactersSuccess(characters));
+        return Promise.all(characterRequests)
+            .then(data => {
+                data.forEach(action => action && dispatch(action));
+                dispatch(requestFilmCharactersSuccess(filmId));
             })
             .catch(error => {
-                dispatch(requestFilmCharactersError(error));
-            }) 
+                dispatch(requestFilmCharactersError(filmId, error));
+            })
     }
 }
 
-export function fetchFilm(id) {
+function fetchFilm(filmId) {
     return dispatch => {
-        dispatch(requestFilm());
-        return axios.get(`films/${id}/`)
+        dispatch(requestFilm(filmId));
+        return axios.get(`films/${filmId}/`)
             .then(response => {
-                dispatch(requestFilmSuccess(response.data));
-                dispatch(fetchFilmCharacters(response.data.characters));
+                const characterIds = response.data.characters.map(character => 
+                    getHrefId(character)
+                );
+                dispatch(requestFilmSuccess(filmId, response.data, response.data.characters = characterIds));
+                dispatch(fetchFilmCharacters(filmId, characterIds));
             })
-            .catch(error => dispatch(requestFilmError(error)))
+            .catch(error => dispatch(requestFilmError(filmId, error)))
+    }
+}
+
+function shouldFetchFilm(state, filmId) {
+    const film = state.film.dataById[filmId];
+    const length = film && film.data;
+    const isLoading = film && film.isLoading;
+
+    if (length || isLoading) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function fetchFilmIfNeeded(characterId) {
+    return (dispatch, getState) => {
+        if (shouldFetchFilm(getState(), characterId)) {
+            return dispatch(fetchFilm(characterId))
+        }
     }
 }
