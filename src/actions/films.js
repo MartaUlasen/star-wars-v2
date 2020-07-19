@@ -1,7 +1,5 @@
 import * as fetcher from 'axios';
-const axios = fetcher.create({
-    baseURL: 'https://swapi.co/api/',
-});
+import httpService from 'services';
 
 export const REQUEST_FILMS = 'REQUEST_FILMS';
 export const REQUEST_FILMS_SUCCESS = 'REQUEST_FILMS_SUCCESS';
@@ -30,7 +28,7 @@ function requestFilmsError(error) {
 function fetchFilms() {
     return dispatch => {
         dispatch(requestFilms());
-        return axios.get('films/')
+        return httpService.get('films/')
             .then(response => dispatch(requestFilmsSuccess(response.data)))
             .catch(error => dispatch(requestFilmsError(error)))
     }

@@ -1,7 +1,5 @@
 import * as fetcher from 'axios';
-const axios = fetcher.create({
-    baseURL: 'https://swapi.co/api/',
-});
+import httpService from 'services';
 
 export const REQUEST_CHARACTER = 'REQUEST_CHARACTER';
 export const REQUEST_CHARACTER_SUCCESS = 'REQUEST_CHARACTER_SUCCESS';
@@ -39,7 +37,7 @@ function requestCharacterError(characterId, error) {
 function fetchCharacter(characterId) {
     return dispatch => {
         dispatch(requestCharacter(characterId));
-        return axios.get(`people/${characterId}`)
+        return httpService.get(`people/${characterId}`)
             .then(response => dispatch(
                 requestCharacterSuccess(characterId, response.data)
             ))

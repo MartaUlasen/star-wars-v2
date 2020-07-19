@@ -1,8 +1,6 @@
 import * as fetcher from 'axios';
 import { fetchCharacterIfNeeded } from 'actions/character';
-const axios = fetcher.create({
-    baseURL: 'https://swapi.co/api/',
-});
+import httpService from 'services';
 
 export const REQUEST_FILM = 'REQUEST_FILM';
 export const REQUEST_FILM_SUCCESS = 'REQUEST_FILM_SUCCESS';
@@ -85,7 +83,7 @@ function fetchFilmCharacters(filmId, characterIds) {
 function fetchFilm(filmId) {
     return dispatch => {
         dispatch(requestFilm(filmId));
-        return axios.get(`films/${filmId}/`)
+        return httpService.get(`films/${filmId}/`)
             .then(response => {
                 const characterIds = response.data.characters.map(character => 
                     getHrefId(character)

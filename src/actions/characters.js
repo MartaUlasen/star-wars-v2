@@ -1,7 +1,5 @@
 import * as fetcher from 'axios';
-const axios = fetcher.create({
-    baseURL: 'https://swapi.co/api/',
-});
+import httpService from 'services';
 
 export const SET_CHRACTERS_PAGE = 'SET_CHRACTERS_PAGE';
 export const REQUEST_CHARACTERS = 'REQUEST_CHARACTERS';
@@ -42,7 +40,7 @@ function fetchCharacters(pageNum) {
     return dispatch => {
         dispatch(requestCharacters(pageNum));
         const pathNumber = !pageNum ? '' : `?page=${pageNum}`;
-        return axios.get(`people/${pathNumber}`)
+        return httpService.get(`people/${pathNumber}`)
             .then(response => (
                 dispatch(requestCharactersSuccess(response.data, pageNum))
             ))
