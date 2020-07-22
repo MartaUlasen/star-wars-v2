@@ -5,7 +5,7 @@ import {
 } from 'actions/films';
 
 function films(state = {
-    isLoading: false,
+    loading: false,
     data: [],
     error: null,
 }, action) {
@@ -13,19 +13,19 @@ function films(state = {
         case REQUEST_FILMS:
             return {
                 ...state,
-                isLoading: true
+                loading: true,
             };
         case REQUEST_FILMS_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
+                loading: false,
                 error: null,
                 data: action.payload,
             };
         case REQUEST_FILMS_ERROR:
             return {
                 ...state,
-                isLoading: false,
+                loading: false,
                 error: action.payload,
                 data: [],
             };
@@ -33,6 +33,5 @@ function films(state = {
             return state;
     }
 }
-
 
 export default films;

@@ -23,7 +23,7 @@ function characters(state = {
                     ...state.dataByPage,
                     [payload.pageNum]: {
                         error: null,
-                        isLoading: true,
+                        loading: true,
                         data: [],
                     },
                 },
@@ -35,7 +35,7 @@ function characters(state = {
                     ...state.dataByPage,
                     [payload.pageNum]: {
                         error: null,
-                        isLoading: false,
+                        loading: false,
                         data: payload.data,
                     },
                 },
@@ -48,7 +48,7 @@ function characters(state = {
                     ...state.dataByPage,
                     [payload.pageNum]: {
                         error: payload,
-                        isLoading: false,
+                        loading: false,
                         data: [],
                     },
                 },
@@ -57,6 +57,5 @@ function characters(state = {
             return state;
     }
 }
-
 
 export default characters;

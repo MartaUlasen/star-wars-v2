@@ -4,7 +4,7 @@ import {
     REQUEST_FILM_ERROR,
     REQUEST_FILM_CHARACTERS,
     REQUEST_FILM_CHARACTERS_SUCCESS,
-    REQUEST_FILM_CHARACTERS_ERROR
+    REQUEST_FILM_CHARACTERS_ERROR,
 } from 'actions/film';
 
 function film(state = {
@@ -18,12 +18,12 @@ function film(state = {
                     ...state.dataById,
                     [payload.filmId]: {
                         error: null,
-                        isLoading: true,
+                        loading: true,
                         data: [],
-                        isLoadingCharacters: false,
+                        loadingCharacters: false,
                         charactersError: null,
-                    }
-                }
+                    },
+                },
             };
         case REQUEST_FILM_SUCCESS:
             return {
@@ -33,11 +33,11 @@ function film(state = {
                     [payload.filmId]: {
                         ...state.dataById[payload.filmId],
                         error: null,
-                        isLoading: false,
+                        loading: false,
                         data: payload.data,
-                    }
-                }
-            }; 
+                    },
+                },
+            };
         case REQUEST_FILM_ERROR:
             return {
                 ...state,
@@ -46,10 +46,10 @@ function film(state = {
                     [payload.filmId]: {
                         ...state.dataById[payload.filmId],
                         error: payload,
-                        isLoading: false,
+                        loading: false,
                         data: [],
-                    }
-                }
+                    },
+                },
             };
         case REQUEST_FILM_CHARACTERS:
             return {
@@ -58,9 +58,9 @@ function film(state = {
                     ...state.dataById,
                     [payload.filmId]: {
                         ...state.dataById[payload.filmId],
-                        isLoadingCharacters: true,
-                    }
-                }
+                        loadingCharacters: true,
+                    },
+                },
             };
         case REQUEST_FILM_CHARACTERS_SUCCESS:
             return {
@@ -69,9 +69,9 @@ function film(state = {
                     ...state.dataById,
                     [payload.filmId]: {
                         ...state.dataById[payload.filmId],
-                        isLoadingCharacters: false,
-                    }
-                }
+                        loadingCharacters: false,
+                    },
+                },
             };
         case REQUEST_FILM_CHARACTERS_ERROR:
             return {
@@ -80,15 +80,14 @@ function film(state = {
                     ...state.dataById,
                     [payload.filmId]: {
                         ...state.dataById[payload.filmId],
-                        isLoadingCharacters: false,
+                        loadingCharacters: false,
                         charactersError: payload.error,
-                    }
-                }
+                    },
+                },
             };
         default:
             return state;
     }
 }
-
 
 export default film;

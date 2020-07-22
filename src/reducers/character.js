@@ -5,7 +5,7 @@ import {
 } from 'actions/character';
 
 function character(state = {
-    dataById: {}, 
+    dataById: {},
 }, { type, payload = {} }) {
     switch (type) {
         case REQUEST_CHARACTER:
@@ -15,10 +15,10 @@ function character(state = {
                     ...state.dataById,
                     [payload.characterId]: {
                         error: null,
-                        isLoading: true,
+                        loading: true,
                         data: [],
-                    }
-                }
+                    },
+                },
             };
         case REQUEST_CHARACTER_SUCCESS:
             return {
@@ -27,10 +27,10 @@ function character(state = {
                     ...state.dataById,
                     [payload.characterId]: {
                         error: null,
-                        isLoading: false,
+                        loading: false,
                         data: payload.data,
-                    }
-                }
+                    },
+                },
             };
         case REQUEST_CHARACTER_ERROR:
             return {
@@ -39,15 +39,14 @@ function character(state = {
                     ...state.dataById,
                     [payload.characterId]: {
                         error: payload,
-                        isLoading: false,
+                        loading: false,
                         data: [],
-                    }
-                }
+                    },
+                },
             };
         default:
             return state;
     }
 }
-
 
 export default character;

@@ -8,9 +8,9 @@ function requestCharacter(characterId) {
     return {
         type: REQUEST_CHARACTER,
         payload: {
-            characterId
+            characterId,
         },
-    }
+    };
 }
 
 function requestCharacterSuccess(characterId, data) {
@@ -20,7 +20,7 @@ function requestCharacterSuccess(characterId, data) {
             characterId,
             data,
         },
-    }
+    };
 }
 
 function requestCharacterError(characterId, error) {
@@ -29,31 +29,30 @@ function requestCharacterError(characterId, error) {
         payload: {
             characterId,
             error,
-        }
-    }
+        },
+    };
 }
 
 function fetchCharacter(characterId) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestCharacter(characterId));
         return httpService.get(`people/${characterId}`)
-            .then(response => dispatch(
-                requestCharacterSuccess(characterId, response.data)
+            .then((response) => dispatch(
+                requestCharacterSuccess(characterId, response.data),
             ))
-            .catch(error => dispatch(requestCharacterError(characterId, error)))
-    }
+            .catch((error) => dispatch(requestCharacterError(characterId, error)));
+    };
 }
 
 function shouldFetchCharacter(state, characterId) {
     const character = state.character.dataById[characterId];
     const length = character && character.data;
-    const isLoading = character && character.isLoading;
+    const loading = character && character.loading;
 
-    if (length || isLoading) {
+    if (length || loading) {
         return false;
-    } else {
-        return true;
     }
+    return true;
 }
 
 export function fetchCharacterIfNeeded(characterId) {
@@ -61,5 +60,6 @@ export function fetchCharacterIfNeeded(characterId) {
         if (shouldFetchCharacter(getState(), characterId)) {
             return dispatch(fetchCharacter(characterId));
         }
-    }
+        return null;
+    };
 }

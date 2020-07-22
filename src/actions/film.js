@@ -8,27 +8,25 @@ export const REQUEST_FILM_CHARACTERS = 'REQUEST_FILM_CHARACTERS';
 export const REQUEST_FILM_CHARACTERS_SUCCESS = 'REQUEST_FILM_CHARACTERS_SUCCESS';
 export const REQUEST_FILM_CHARACTERS_ERROR = 'REQUEST_FILM_CHARACTERS_ERROR';
 
-const getHrefId = (href) => {
-	return href.split('/').filter(function(v){return v;}).pop();
-}
+const getHrefId = (href) => href.split('/').filter((v) => v).pop();
 
 function requestFilm(filmId) {
     return {
         type: REQUEST_FILM,
         payload: {
-            filmId
+            filmId,
         },
-    }
+    };
 }
 
-function requestFilmSuccess(filmId, data, characterIds) {
+function requestFilmSuccess(filmId, data) {
     return {
         type: REQUEST_FILM_SUCCESS,
         payload: {
             filmId,
             data,
         },
-    }
+    };
 }
 
 function requestFilmError(filmId, error) {
@@ -37,79 +35,85 @@ function requestFilmError(filmId, error) {
         payload: {
             filmId,
             error,
-        }
-    }
+        },
+    };
 }
 
 function requestFilmCharacters(filmId) {
     return {
         type: REQUEST_FILM_CHARACTERS,
         payload: { filmId },
-    }
+    };
 }
 
 function requestFilmCharactersSuccess(filmId) {
     return {
         type: REQUEST_FILM_CHARACTERS_SUCCESS,
         payload: { filmId },
-    }
+    };
 }
 
 function requestFilmCharactersError(filmId, error) {
     return {
         type: REQUEST_FILM_CHARACTERS_ERROR,
         payload: { filmId, error },
-    }
+    };
 }
 
 function fetchFilmCharacters(filmId, characterIds) {
     return (dispatch, getState) => {
         dispatch(requestFilmCharacters(filmId));
 
-        const characterRequests = characterIds.map(id => fetchCharacterIfNeeded(id)(dispatch, getState));
+        const characterRequests = characterIds.map(
+            (id) => fetchCharacterIfNeeded(id)(dispatch, getState),
+        );
 
         return Promise.all(characterRequests)
-            .then(data => {
-                data.forEach(action => action && dispatch(action));
+            .then((data) => {
+                data.forEach((action) => action && dispatch(action));
                 dispatch(requestFilmCharactersSuccess(filmId));
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch(requestFilmCharactersError(filmId, error));
-            })
-    }
+            });
+    };
 }
 
 function fetchFilm(filmId) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestFilm(filmId));
         return httpService.get(`films/${filmId}/`)
-            .then(response => {
-                const characterIds = response.data.characters.map(character => 
-                    getHrefId(character)
+            .then((response) => {
+                const characterIds = response.data.characters.map(
+                    (character) => getHrefId(character),
                 );
-                dispatch(requestFilmSuccess(filmId, response.data, response.data.characters = characterIds));
+                dispatch(requestFilmSuccess(
+                    filmId,
+                    response.data,
+                    response.data.characters = characterIds,
+                ));
                 dispatch(fetchFilmCharacters(filmId, characterIds));
             })
-            .catch(error => dispatch(requestFilmError(filmId, error)))
-    }
+            .catch((error) => dispatch(requestFilmError(filmId, error)));
+    };
 }
 
 function shouldFetchFilm(state, filmId) {
     const film = state.film.dataById[filmId];
     const length = film && film.data;
-    const isLoading = film && film.isLoading;
+    const loading = film && film.loading;
 
-    if (length || isLoading) {
+    if (length || loading) {
         return false;
-    } else {
-        return true;
     }
+    return true;
 }
 
 export function fetchFilmIfNeeded(characterId) {
     return (dispatch, getState) => {
         if (shouldFetchFilm(getState(), characterId)) {
-            return dispatch(fetchFilm(characterId))
+            return dispatch(fetchFilm(characterId));
         }
-    }
+        return null;
+    };
 }

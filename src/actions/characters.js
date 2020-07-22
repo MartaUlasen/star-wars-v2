@@ -9,9 +9,9 @@ function requestCharacters(pageNum) {
     return {
         type: REQUEST_CHARACTERS,
         payload: {
-            pageNum
+            pageNum,
         },
-    }
+    };
 }
 
 function requestCharactersSuccess(data, pageNum) {
@@ -22,7 +22,7 @@ function requestCharactersSuccess(data, pageNum) {
             data: data.results,
             count: data.count,
         },
-    }
+    };
 }
 
 function requestCharactersError(error, pageNum) {
@@ -31,47 +31,45 @@ function requestCharactersError(error, pageNum) {
         payload: {
             error,
             pageNum,
-        }
-    }
+        },
+    };
 }
 
 function fetchCharacters(pageNum) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestCharacters(pageNum));
         const pathNumber = !pageNum ? '' : `?page=${pageNum}`;
         return httpService.get(`people/${pathNumber}`)
-            .then(response => (
+            .then((response) => (
                 dispatch(requestCharactersSuccess(response.data, pageNum))
             ))
-            .catch(error => dispatch(requestCharactersError(error)))
-    }
+            .catch((error) => dispatch(requestCharactersError(error)));
+    };
 }
-
 
 function shouldFetchCharacters(state, pageNum) {
     const page = state.characters.dataByPage[pageNum];
     const length = page && page.data.length;
-    const isLoading = page && page.isLoading;
+    const loading = page && page.loading;
 
-    if (length || isLoading) {
+    if (length || loading) {
         return false;
-    } else {
-        return true;
-    } 
+    }
+    return true;
 }
-
 
 export function fetchCharactersIfNeeded(pageNum) {
     return (dispatch, getState) => {
         if (shouldFetchCharacters(getState(), pageNum)) {
             return dispatch(fetchCharacters(pageNum));
         }
-    }
+        return null;
+    };
 }
 
 export function setCharactersPage(pageNum) {
     return {
         type: SET_CHRACTERS_PAGE,
         payload: pageNum,
-    }
+    };
 }
