@@ -1,4 +1,3 @@
-import * as fetcher from 'axios';
 import { fetchCharacterIfNeeded } from 'actions/character';
 import httpService from 'services';
 

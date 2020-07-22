@@ -12,7 +12,6 @@ import './app.scss';
 import 'styles/card.scss';
 import 'styles/buttons.scss';
 import 'styles/base.scss';
-
 class App extends Component {
 	render() {
 		return (
@@ -28,7 +27,7 @@ class App extends Component {
 					</Switch>
 				</main>
 			</div>
-    	);
+        );
 	}
 }
 

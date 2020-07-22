@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import ReactSwiper from 'react-id-swiper';
-import 'swiper/dist/css/swiper.min.css';
+import 'swiper/swiper-bundle.css';
 import './swiper.scss';
 
 const SLIDER_PARAMS = {

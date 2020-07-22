@@ -1,4 +1,3 @@
-import * as fetcher from 'axios';
 import httpService from 'services';
 
 export const REQUEST_CHARACTER = 'REQUEST_CHARACTER';

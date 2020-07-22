@@ -1,4 +1,3 @@
-import * as fetcher from 'axios';
 import httpService from 'services';
 
 export const SET_CHRACTERS_PAGE = 'SET_CHRACTERS_PAGE';
