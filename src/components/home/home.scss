@@ -1,18 +1,19 @@
 .icon-r2d2,
 .icon-bb8 {
-	width: 200px;
-	height: 200px;
-	margin: 0 -16px;
+    width: 200px;
+    height: 200px;
+    margin: 0 -16px;
 }
 
 .icon-bb8 {
-	transform: rotateY(180deg);
-	padding-bottom: 8px;
+    padding-bottom: 8px;
+    transform: rotateY(180deg);
 }
 
 .characters-pictures {
     display: flex;
     justify-content: center;
+
     &__item {
         display: inline-block;
     }

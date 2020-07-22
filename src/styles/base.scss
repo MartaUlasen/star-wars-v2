@@ -1,11 +1,11 @@
 .block-right {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .separator {
-	border-top: transparent;
-	border-color: rgba(255, 232, 31, 0.4);
-	margin-bottom: 24px;
+    margin-bottom: 24px;
+    border-color: rgba(255, 232, 31, 0.4);
+    border-top: transparent;
 }

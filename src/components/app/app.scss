@@ -1,139 +1,143 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-	background-color: #272B30;
-	font-size: 1rem;
 	
-	color: rgba(255, 232, 31, 0.8);
+    color: rgba(255, 232, 31, 0.8);
+    font-size: 1rem;
+    background-color: #272b30;
 }
 
 h4 {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 main {
-	display: block;
-	padding: 12px 0;
+    display: block;
+    padding: 12px 0;
 }
 
 .wrapper {
-	padding: 0 calc(50% - 450px);
-	max-width: 100%;
-	@media only screen and (max-width: 800px) {
-	    padding: 0 1rem;
-	}
+    max-width: 100%;
+    padding: 0 calc(50% - 450px);
+    @media only screen and (max-width: 800px) {
+        padding: 0 1rem;
+    }
 }
 
 .grid {
-	display: block;
-	padding: 0;
-	list-style: none;
-	margin: 0 -0.5em;
-	&__item {
-		width: 12em;
-		height: 15em;
-		display: inline-block;
-		vertical-align: top;
-		margin: 0.5em;
-		text-align: left;
-	}
+    display: block;
+    margin: 0 -0.5em;
+    padding: 0;
+    list-style: none;
+
+    &__item {
+        display: inline-block;
+        width: 12em;
+        height: 15em;
+        margin: 0.5em;
+        text-align: left;
+        vertical-align: top;
+    }
 }
 
 @supports (display:grid) {
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
-		grid-gap: 0.5em;
-		padding: 0;
-		list-style: none;
-		margin: 0;
-		&__item {
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: initial;
-			max-width: none;
-		}
+    .grid {
+        display: grid;
+        grid-gap: 0.5em;
+        grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        &__item {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            margin: 0;
+            padding: initial;
+        }
 		
-	}
+    }
 }
 
 .logo {
     width: 200px;
-	margin: 8px auto;
-	svg {
-		width: 100%;
-		height: 100%;
-	}
+    margin: 8px auto;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .icon-loading {
-	width: 100%;
-	margin: 0 auto;
-	animation-name: spin;
+    width: 100%;
+    margin: 0 auto;
+    animation-name: spin;
     animation-duration: 2000ms;
-    animation-iteration-count: infinite;
     animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform: rotate(0deg);
     }
+
     to {
-        transform:rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
 .root {
-	padding: 16px 0;
+    padding: 16px 0;
 }
 
 .film-card {
-	position: relative;
-	transform: translate3d(0,0,0);
+    position: relative;
+    transform: translate3d(0, 0, 0);
 }
 
 .film-title>span {
-	margin-left: 4px;
+    margin-left: 4px;
 }
 
 .film-info {
-	border: 1px solid rgba(255, 232, 31, 0.8);
-	border-radius: 0.25rem;
+    border: 1px solid rgba(255, 232, 31, 0.8);
+    border-radius: 0.25rem;
 }
 
 tbody > .row {
-	margin-left: 0;
-	margin-right: 0;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .spinner {
-	display: inline-block;
     position: fixed;
-    z-index: 100;
-    width: 100vw;
     top: 50%;
     right: 0;
     left: 0;
-    text-align: center;
+    z-index: 100;
+    display: inline-block;
+    width: 100vw;
     height: 100vh;
+    text-align: center;
 }
 
 .carousel-item img {
-	width: 350px;
+    width: 350px;
 }
 
 .navigation {
-	background-color: #32383e;
+    background-color: #32383e;
 }
 
 .title {
-	width: 100%;
-	font-size: 1.29rem;
-	text-align: center;
-	text-transform: uppercase;
-	padding: 8px 0;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 1.29rem;
+    text-align: center;
+    text-transform: uppercase;
 }

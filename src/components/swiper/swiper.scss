@@ -1,16 +1,17 @@
 .swiper {
-	display: flex;
-	align-items: center;
-	width: calc(100% + 70px);
+    display: flex;
+    align-items: center;
+    width: calc(100% + 70px);
     margin: 0 -35px 40px;
 }
 
-.swiper__button {
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	svg {
+.swiper-button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    svg {
         stroke: #ffe81f;
         stroke-width: 1px;
-	}
+    }
 }
