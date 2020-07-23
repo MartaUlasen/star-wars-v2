@@ -36,7 +36,7 @@ function requestCharacterError(characterId, error) {
 function fetchCharacter(characterId) {
     return (dispatch) => {
         dispatch(requestCharacter(characterId));
-        return httpService.get(`people/${characterId}`)
+        return httpService.get(`people/${characterId}/`)
             .then((response) => dispatch(
                 requestCharacterSuccess(characterId, response.data),
             ))
