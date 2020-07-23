@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchFilmIfNeeded } from 'actions/film';
+import { 
+    fetchFilmIfNeeded as fetchFilmIfNeededIfNeededAction
+} from 'actions/film';
 import { selectFilmDataById } from 'selectors';
 import { Loader } from 'react-feather';
 import CharacterLink from './characterLink';
@@ -8,6 +10,7 @@ import './film.scss';
 
 class Film extends Component {
     componentDidMount() {
+        const { fetchFilmIfNeeded } = this.props;
         const { match: { params: { id } } } = this.props;
         fetchFilmIfNeeded(id);
     }
@@ -47,7 +50,7 @@ class Film extends Component {
                     <div className='grid-20-80__item'>Date of reliase:</div>
                     <div className='grid-20-80__item'>{data.release_date}</div>
                     <div className='grid-20-80__item'>Characters:</div>
-                    <ul className='grid-20-80__item film__characters'>
+                    <ul className='grid-20-80__item film-characters'>
                         {this.renderCharacterError()}
                         {
                             loadingCharacters
@@ -88,7 +91,7 @@ const mapStateToProps = ({ film }, { match: { params: { id } } }) => ({
 });
 
 const mapDispatchToProps = {
-    fetchFilmIfNeeded,
+    fetchFilmIfNeeded: fetchFilmIfNeededIfNeededAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Film);

@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "author": "Marta Ulasen",
   "private": false,
-  "homepage": "https://martaulasen.github.io/star-wars-v2/",
+  "homepage": "https://martaulasen.github.io/star-wars-v2",
   "dependencies": {
     "axios": "^0.19.2",
     "query-string": "^6.13.1",

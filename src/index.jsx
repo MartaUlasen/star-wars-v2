@@ -14,7 +14,7 @@ window.store = store;
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/star-wars-v2">
             <App />
         </BrowserRouter>
     </Provider>,

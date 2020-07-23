@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { fetchCharacterIfNeeded } from 'actions/character';
+import {
+    fetchCharacterIfNeeded as fetchCharacterIfNeededAction,
+} from 'actions/character';
 import { selectCharacterDataById } from 'selectors';
 import { Loader, User } from 'react-feather';
 
 class Character extends Component {
     componentDidMount = () => {
+        const { fetchCharacterIfNeeded } = this.props;
         const { match: { params: { id } } } = this.props;
         fetchCharacterIfNeeded(id);
     }
@@ -55,7 +57,7 @@ const mapStateToProps = ({ character }, { match: { params: { id } } }) => ({
 });
 
 const mapDispatchToProps = {
-    fetchCharacterIfNeeded,
+    fetchCharacterIfNeeded: fetchCharacterIfNeededAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Character);
